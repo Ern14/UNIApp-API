@@ -3,14 +3,14 @@ import { getUsers } from "../controllers/users.controller";
 
 const router = Router();
 
-router.get('/Home', getUsers);
+router.get('/home', getUsers);
 
-router.post('/Home', getUsers);
+router.post('/home',);
 
-router.get('/Home', getUsers);
+router.get('/home',);
 
-router.delete('/Home', getUsers);
+router.delete('/home',);
 
-router.put('/Home', getUsers);
+router.put('/home',);
 
 export default router;

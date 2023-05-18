@@ -1,4 +1,7 @@
 import app from "./app";
+const cors = require('cors');
+
+app.use(cors());
 
 app.listen(app.get('port'));
 
