@@ -9,6 +9,7 @@ Content-Type: application/json
 
 {
     "correo": "test@gmail.com",
-    "contrasena": "1234",
-    "estado": "1"
+    "passwrd": "1234",
+    "userStatus": 1,
+    "FK_idRol": 2
 }
