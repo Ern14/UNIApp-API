@@ -11,7 +11,7 @@ export const createUsers = async ( req, res ) => {
 
     let { correo, passwrd, userStatus, FK_idRol } = req.body;
 
-    if ( correo == null || passwrd == null || userStatus == null){
+    if ( correo == null || passwrd == null ){
         return res.status(400).json({ msg: "Bad request"});
     };
 
