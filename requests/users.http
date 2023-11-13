@@ -1,4 +1,4 @@
-@api= http://localhost:4000/users
+@api= http://localhost:4000/usuarios
 
 
 GET {{api}}
@@ -8,8 +8,9 @@ POST {{api}}
 Content-Type: application/json
 
 {
-    "correo": "test@gmail.com",
-    "passwrd": "1234",
-    "userStatus": 1,
-    "FK_idRol": 2
+    "FK_idRol": 2,
+    "Correo": "test@gmail.com",
+    "Contraseña": "1234",
+    "Activo": 1
+    
 }
