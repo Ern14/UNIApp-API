@@ -1,16 +1,14 @@
 import { Router } from "express";
-import { getUsuarios, postUsuarios } from "../controllers/usuarios.controller";
+import { obtenerUsuarios, insertarUsuarios } from "../controllers/usuarios.controller";
 
 const router = Router();
 
-router.get('/usuarios', getUsuarios);
+router.get('/obtenerUsuarios', obtenerUsuarios);
 
-router.post('/usuarios', postUsuarios);
+router.post('/insertarUsuarios', insertarUsuarios);
 
-router.get('/home',);
+router.put('/actualizarUsuarios',);
 
 router.delete('/home',);
-
-router.put('/home',);
 
 export default router;

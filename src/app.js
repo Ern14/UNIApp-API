@@ -4,7 +4,9 @@ import usersRoutes from './routes/usuarios.routes';
 
 const app = express();
 
+const cors = require('cors');
 
+app.use(cors());
 //Configuración del puerto
 app.set('port', config.port);
 

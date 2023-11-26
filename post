@@ -1,0 +1,78 @@
+[33mcommit a12adfe7d2e955b36a5d046f97dab39a68b6b2b6[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Nighfire3250 <ernestoraf2011@gmail.com>
+Date:   Wed Sep 6 09:14:51 2023 -0600
+
+    controlador
+
+[33mcommit 27de2a9979ce3320c5d5f3523f6faa00dee3f136[m
+Author: Nighfire3250 <ernestoraf2011@gmail.com>
+Date:   Tue Jul 18 21:51:24 2023 -0600
+
+    post a base de datos
+
+[33mcommit 62430b3d45a16417ddba7de35e31e9b38b480641[m
+Author: Nighfire3250 <ernestoraf2011@gmail.com>
+Date:   Sun Jul 16 22:52:43 2023 -0600
+
+    users post
+
+[33mcommit 2c43bde66c927228f3cd79ff1856905e478a5b4f[m
+Author: Nighfire3250 <ernestoraf2011@gmail.com>
+Date:   Sat May 20 21:58:43 2023 -0600
+
+    rutas
+
+[33mcommit 80758b35184a782f487fe4ed1b262ec763a27b2e[m
+Author: Nighfire3250 <ernestoraf2011@gmail.com>
+Date:   Wed May 17 23:47:14 2023 -0600
+
+    Config cors
+
+[33mcommit d08e0bb715c0f48d31e21c49e8a487e4dab4212a[m
+Author: Nighfire3250 <ernestoraf2011@gmail.com>
+Date:   Wed May 10 22:37:14 2023 -0600
+
+    request user test
+
+[33mcommit 683086c07b287facd906f64ebdd331ab0544fbac[m
+Author: Nighfire3250 <ernestoraf2011@gmail.com>
+Date:   Mon May 8 21:27:57 2023 -0600
+
+    db connection
+
+[33mcommit b8a65c6db7ce253838c9e774e34c38389c60827e[m
+Author: Nighfire3250 <ernestoraf2011@gmail.com>
+Date:   Fri May 5 23:10:56 2023 -0600
+
+    test commit
+
+[33mcommit 3daffef743fb634252ac21a231f3cf5019ab85cc[m
+Author: Nighfire3250 <ernestoraf2011@gmail.com>
+Date:   Fri May 5 22:56:23 2023 -0600
+
+    connection and test
+
+[33mcommit f5447c2ed8ed1db18230fc555b391b853e164b61[m
+Author: Nighfire3250 <ernestoraf2011@gmail.com>
+Date:   Thu May 4 21:53:39 2023 -0600
+
+    port and db Config
+
+[33mcommit da64d6f5eaba4c7fc2444db150a900df43698c9a[m
+Merge: ebf096c ebd4eaf
+Author: Nighfire3250 <ernestoraf2011@gmail.com>
+Date:   Thu May 4 13:35:58 2023 -0600
+
+    Merge branch 'master' of github.com:Nighfire3250/UNIApp-API
+
+[33mcommit ebf096cebb09527b1ff0a65ef2872231da3bff16[m
+Author: Nighfire3250 <ernestoraf2011@gmail.com>
+Date:   Thu May 4 13:22:52 2023 -0600
+
+    first commit
+
+[33mcommit ebd4eafafab280164b003538244be860b66297d6[m
+Author: Nighfire3250 <105762675+Nighfire3250@users.noreply.github.com>
+Date:   Thu May 4 13:20:04 2023 -0600
+
+    Initial commit
