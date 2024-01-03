@@ -1,4 +1,3 @@
-import { getConnection, sql } from "../database/connection";
 import { obtenerUsuariosBLL, insertarUsuariosBLL } from '../capas/BLL/usuarios';
 
 export const obtenerUsuarios = async ( req, res ) => {
