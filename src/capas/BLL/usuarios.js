@@ -1,5 +1,6 @@
 import { obtenerUsuariosDAL, insertarUsuariosDAL } from "../DAL/usuarios";
 
+
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -9,30 +10,28 @@ const encryptPassword = async (password) => {
     return hash;
 };
 
-export const obtenerUsuariosBLL = async (req, res) => {
+export const obtenerUsuariosBLL = async () => {
     try {
         const usuarios = await obtenerUsuariosDAL();
         return usuarios;
     } catch (error) {
-        return res.status(400).json({ msg: "Bad request", error: error.message });
+        throw error;
     }
 };
 
 
-export const insertarUsuariosBLL = async (req, res) => {
+export const insertarUsuariosBLL = async (modUsuarios) => {
     try {
-        const userData = req.body;
-
-        if (userData.Correo == null || userData.Contraseña == null) {
-            return res.status(400).json({ msg: "Bad request: incomplete information" });
+        if (modUsuarios.Correo == null || modUsuarios.Contraseña == null) {
+            throw new Error("Bad request: incomplete information");
         };
 
-        const hashedPassword = await encryptPassword(userData.Contraseña);
-        userData.Contraseña = hashedPassword;
+        const hashedPassword = await encryptPassword(modUsuarios.Contraseña);
+        modUsuarios.Contraseña = hashedPassword;
 
-        await insertarUsuariosDAL(userData);
-        res.json('Exito');
+        const result = await insertarUsuariosDAL(modUsuarios);
+        return result;
     } catch (error) {
-        return res.status(400).json({ msg: "Bad request: ", error: error.message });
+        throw error;
     }
 };

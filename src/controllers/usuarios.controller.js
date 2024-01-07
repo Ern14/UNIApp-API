@@ -1,8 +1,9 @@
 import { obtenerUsuariosBLL, insertarUsuariosBLL } from '../capas/BLL/usuarios';
+import { Usuarios } from "../modelos/seguridad/usuarios";
 
 export const obtenerUsuarios = async ( req, res ) => {
     try {
-        const data = await obtenerUsuariosBLL(req, res);
+        const data = await obtenerUsuariosBLL();
         const response = {
             status: 'Exito',
             statusCode: 200,
@@ -11,15 +12,33 @@ export const obtenerUsuarios = async ( req, res ) => {
         res.status(response.statusCode).send(response);
 
     } catch (error) {
-        return res.status(400).json({ msg: "Bad request", error: error.message });
+        const response = {
+            status: 'Error',
+            statusCode: error.statusCode || 500,
+            datos: error.message
+        }
+        res.status(response.statusCode).send(response);
     }
 
 };
 
 export const insertarUsuarios = async ( req, res ) => {
     try {
-        await insertarUsuariosBLL(req, res);
+        const userData = req.body;
+        const modUsuarios = new Usuarios(userData);
+        const data = await insertarUsuariosBLL(modUsuarios);
+        const response = {
+            status: 'Exito',
+            statusCode: 200,
+            datos: data
+        }
+        res.status(response.statusCode).send(response);
     } catch (error) {
-        return res.status(400).json({ msg: "Bad request", error: error.message });
+        const response = {
+            status: 'Error',
+            statusCode: error.statusCode || 500,
+            datos: error.message
+        }
+        res.status(response.statusCode).send(response);
     }   
 };

@@ -6,40 +6,28 @@ export const obtenerUsuariosDAL = async () => {
         const result = await pool.request().execute('[Seguridad].[FiltrarUsuarios]');
         return result.recordset;
     } catch (error) {
-        return res.status(400).json({ msg: "Bad request: ", error: error.message });
+        throw error;
     }
 
 };
 
-export const insertarUsuariosDAL = async (userData) => {
-    try {
-        const {
-            FK_idRol,
-            Correo,
-            Contraseña,
-            Activo,
-            FechaCreacion,
-            UsuarioCreacion,
-            FechaModificacion,
-            UsuarioModificacion
-        } = userData;
-    
-    
+export const insertarUsuariosDAL = async (modUsuarios) => {
+    try {    
         const pool = await getConnection();
         const result = await pool.request()
-        .input('FK_idRol' ,sql.Int, FK_idRol) 
-        .input('Correo', sql.VarChar, Correo)
-        .input('Contraseña' ,sql.VarChar, Contraseña)
-        .input('Activo' ,sql.Bit, Activo)
-        .input('FechaCreacion' ,sql.DateTime, FechaCreacion)
-        .input('UsuarioCreacion' ,sql.Int, UsuarioCreacion)
-        .input('FechaModificacion' ,sql.DateTime, FechaModificacion)
-        .input('UsuarioModificacion' ,sql.Int, UsuarioModificacion)
+        .input('FK_idRol' ,sql.Int, modUsuarios.FK_idRol) 
+        .input('Correo', sql.VarChar, modUsuarios.Correo)
+        .input('Contraseña' ,sql.VarChar, modUsuarios.Contraseña)
+        .input('Activo' ,sql.Bit, modUsuarios.Activo)
+        .input('FechaCreacion' ,sql.DateTime, modUsuarios.FechaCreacion)
+        .input('UsuarioCreacion' ,sql.Int, modUsuarios.UsuarioCreacion)
+        .input('FechaModificacion' ,sql.DateTime, modUsuarios.FechaModificacion)
+        .input('UsuarioModificacion' ,sql.Int, modUsuarios.UsuarioModificacion)
         .execute('[Seguridad].[InsertarUsuarios]');
-    
-        return result;
+
+        return result.recordset;
     } catch (error) {
-        return res.status(400).json({ msg: "Bad request: ", error: error.message });
+        throw error;
     }
 
 };
