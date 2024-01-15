@@ -11,6 +11,32 @@ export const obtenerUsuariosDAL = async () => {
 
 };
 
+export const filtrarUsuariosxCorreoDAL = async (Correo) => {
+    try {
+        const pool = await getConnection();
+        const result = await pool.request()
+        .input('Correo', sql.VarChar, Correo)
+        .execute('[Seguridad].[FiltrarUsuariosxCorreo]');
+        return result.recordset;
+    } catch (error) {
+        throw error;
+    }
+
+};
+
+export const validarUsuarioxCorreoDAL = async (Correo) => {
+    try {
+        const pool = await getConnection();
+        const result = await pool.request()
+        .input('Correo', sql.VarChar, Correo)
+        .execute('[Seguridad].[ValidarUsuarioxCorreo]');
+        return result.recordset;
+    } catch (error) {
+        throw error;
+    }
+
+};
+
 export const insertarUsuariosDAL = async (modUsuarios) => {
     try {    
         const pool = await getConnection();
