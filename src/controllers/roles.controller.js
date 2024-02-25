@@ -1,4 +1,4 @@
-import { obtenerRolesBLL, insertarRolesBLL, actualizarRolesBLL, eliminarRolesBLL, obtenerRolxIdBLL } from '../capas/BLL/roles';
+import { obtenerRolesBLL, insertarRolesBLL, actualizarRolesBLL, obtenerRolxIdBLL } from '../capas/BLL/roles';
 import { Roles } from '../modelos/seguridad/roles'
 
 export const obtenerRoles = async ( req, res ) => {
