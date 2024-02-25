@@ -1,4 +1,4 @@
-import { obtenerUsuariosBLL, insertarUsuariosBLL, filtrarUsuariosxCorreoBLL, validarUsuarioxCorreoBLL } from '../capas/BLL/usuarios';
+import { obtenerUsuariosBLL, insertarUsuariosBLL, filtrarUsuariosxCorreoBLL, validarUsuarioxCorreoBLL, actualizarUsuariosBLL, filtrarUsuariosxIdBLL } from '../capas/BLL/usuarios';
 import { Usuarios } from "../modelos/seguridad/usuarios";
 
 export const obtenerUsuarios = async ( req, res ) => {
@@ -72,6 +72,28 @@ export const insertarUsuarios = async ( req, res ) => {
         const userData = req.body;
         const modUsuarios = new Usuarios(userData);
         const data = await insertarUsuariosBLL(modUsuarios);
+        const response = {
+            status: 'Exito',
+            statusCode: 200,
+            datos: data
+        }
+        res.status(response.statusCode).send(response);
+    } catch (error) {
+        const response = {
+            status: 'Error',
+            statusCode: error.statusCode || 500,
+            datos: error.message
+        }
+        res.status(response.statusCode).send(response);
+    }   
+};
+
+export const actualizarUsuarios = async ( req, res ) => {
+    try {
+        const idUsuario = req.body.idUsuario;
+        const usuarioFiltrado = await filtrarUsuariosxIdBLL(idUsuario);
+        const modUsuarios = new Usuarios(usuarioFiltrado[0]);
+        const data = await actualizarUsuariosBLL(modUsuarios);
         const response = {
             status: 'Exito',
             statusCode: 200,

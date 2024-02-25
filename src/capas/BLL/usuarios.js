@@ -1,5 +1,6 @@
 import bcryptjs from 'bcryptjs';
-import { obtenerUsuariosDAL, insertarUsuariosDAL, filtrarUsuariosxCorreoDAL, validarUsuarioxCorreoDAL } from "../DAL/usuarios";
+import { obtenerUsuariosDAL, insertarUsuariosDAL, filtrarUsuariosxCorreoDAL, validarUsuarioxCorreoDAL, actualizarUsuariosDAL, filtrarUsuariosxIdDAL } from "../DAL/usuarios";
+const fs = require('fs');
 
 
 const encryptPassword = async (password) => {
@@ -22,6 +23,15 @@ export const filtrarUsuariosxCorreoBLL = async (Correo) => {
     try {
         const usuarios = await filtrarUsuariosxCorreoDAL(Correo);
         return usuarios;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const filtrarUsuariosxIdBLL = async (idUsuario) => {
+    try {
+        const usuario = await filtrarUsuariosxIdDAL(idUsuario);
+        return usuario;
     } catch (error) {
         throw error;
     }
@@ -59,11 +69,24 @@ export const insertarUsuariosBLL = async (modUsuarios) => {
         if (modUsuarios.Correo == null || modUsuarios.Contraseña == null) {
             throw new Error("Bad request: incomplete information");
         };
-        
         const hashedPassword = await encryptPassword(modUsuarios.Contraseña);
         modUsuarios.Contraseña = hashedPassword;
-        
+        const fechaHoraActual = new Date();
+        modUsuarios.FechaCreacion = fechaHoraActual;
+        modUsuarios.FechaModificacion = fechaHoraActual;
         const result = await insertarUsuariosDAL(modUsuarios);
+        return result;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const actualizarUsuariosBLL = async (modUsuarios) => {
+    try {
+        const fechaHoraActual = new Date();
+        modUsuarios.Activo = 0;
+        modUsuarios.FechaModificacion = fechaHoraActual;
+        const result = await actualizarUsuariosDAL(modUsuarios);
         return result;
     } catch (error) {
         throw error;

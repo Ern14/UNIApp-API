@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { obtenerUsuarios, insertarUsuarios, filtrarUsuariosxCorreo, validarUsuarioxCorreo } from "../controllers/usuarios.controller";
+import { obtenerUsuarios, insertarUsuarios, filtrarUsuariosxCorreo, validarUsuarioxCorreo, actualizarUsuarios } from "../../controllers/usuarios.controller";
 
 const router = Router();
 
@@ -11,8 +11,8 @@ router.get('/filtrarUsuarios/:Correo', filtrarUsuariosxCorreo);
 
 router.post('/validarUsuario', validarUsuarioxCorreo);
 
-router.put('/actualizarUsuarios',);
+router.put('/actualizarUsuarios', actualizarUsuarios);
 
-router.delete('/home',);
+router.delete('/eliminarUsuarios', actualizarUsuarios);
 
 export default router;
