@@ -1,9 +1,9 @@
-import { obtenerRolesBLL, insertarRolesBLL, actualizarRolesBLL, obtenerRolxIdBLL } from '../capas/BLL/roles';
-import { Roles } from '../modelos/seguridad/roles';
+import { obtenerDocentesBLL, insertarDocenteBLL, actualizarDocenteBLL, obtenerDocentexIdBLL } from '../../capas/BLL/catalogo/docentes';
+import { Docentes } from '../../modelos/catalogo/docentes';
 
-export const obtenerRoles = async ( req, res ) => {
+export const obtenerDocentes = async ( req, res ) => {
     try {
-        const data = await obtenerRolesBLL();
+        const data = await obtenerDocentesBLL();
         const response = {
             status: 'Exito',
             statusCode: 200,
@@ -22,22 +22,22 @@ export const obtenerRoles = async ( req, res ) => {
 
 };
 
-export const insertarRoles = async ( req, res ) => {
+export const insertarDocente = async ( req, res ) => {
     try {
         const fechaHoraActual = new Date();
         const userData = req.body;
-        const modRoles = new Roles(userData);
-        if (modRoles.Nombre == null) {
+        const modDocente = new Docentes(userData);
+        if (modDocente.Nombre == null || modDocente.Apellido == null) {
             throw new Error("Bad request: incomplete information");
         };
         
-        modRoles.Activo = 1;
-        modRoles.FechaCreacion = fechaHoraActual;
-        modRoles.FechaModificacion = fechaHoraActual;
-        modRoles.UsuarioCreacion = 1;
-        modRoles.UsuarioModificacion = 1;
+        modDocente.Activo = 1;
+        modDocente.FechaCreacion = fechaHoraActual;
+        modDocente.FechaModificacion = fechaHoraActual;
+        modDocente.UsuarioCreacion = 1;
+        modDocente.UsuarioModificacion = 1;
 
-        const data = await insertarRolesBLL(modRoles);
+        const data = await insertarDocenteBLL(modDocente);
         const response = {
             status: 'Exito',
             statusCode: 200,
@@ -55,25 +55,25 @@ export const insertarRoles = async ( req, res ) => {
 
 };
 
-export const actualizarRoles = async ( req, res ) => {
+export const actualizarDocente = async ( req, res ) => {
     try {
         const fechaHoraActual = new Date();
-        const idRol = req.body.idRol;
+        const idDocente = req.body.idDocente;
         const Nombre = req.body.Nombre;
-        const Descripcion = req.body.Descripcion;
-        const userData = await obtenerRolxIdBLL(idRol);
+        const Apellido = req.body.Apellido;
+        const userData = await obtenerDocentexIdBLL(idDocente);
 
         if (userData.length > 0){
-            const modRoles = new Roles(userData[0]);
+            const modDocente = new Docentes(userData[0]);
 
-            modRoles.idRol = idRol;
-            modRoles.Nombre = Nombre;
-            modRoles.Descripcion = Descripcion;
-            modRoles.Activo = 1;
-            modRoles.FechaModificacion = fechaHoraActual;
-            modRoles.UsuarioModificacion = 1;
+            modDocente.idDocente = idDocente;
+            modDocente.Nombre = Nombre;
+            modDocente.Apellido = Apellido;
+            modDocente.Activo = 1;
+            modDocente.FechaModificacion = fechaHoraActual;
+            modDocente.UsuarioModificacion = 1;
     
-            const data = await actualizarRolesBLL(modRoles);
+            const data = await actualizarDocenteBLL(modDocente);
 
             const response = {
                 status: 'Exito',
@@ -101,20 +101,20 @@ export const actualizarRoles = async ( req, res ) => {
 
 };
 
-export const eliminarRoles = async ( req, res ) => {
+export const eliminarDocente = async ( req, res ) => {
     try {
         const fechaHoraActual = new Date();
-        const idRol = req.body.idRol;
-        const userData = await obtenerRolxIdBLL(idRol);
+        const idDocente = req.body.idDocente;
+        const userData = await obtenerDocentexIdBLL(idDocente);
 
         if (userData.length > 0){
-            const modRoles = new Roles(userData[0]);
+            const modDocente = new Docentes(userData[0]);
 
-            modRoles.Activo = 0;
-            modRoles.FechaModificacion = fechaHoraActual;
-            modRoles.UsuarioModificacion = 1;
+            modDocente.Activo = 0;
+            modDocente.FechaModificacion = fechaHoraActual;
+            modDocente.UsuarioModificacion = 1;
     
-            const data = await actualizarRolesBLL(modRoles);
+            const data = await actualizarDocenteBLL(modDocente);
 
             const response = {
                 status: 'Exito',
