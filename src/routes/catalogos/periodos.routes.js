@@ -1,15 +1,15 @@
 import { Router } from "express";
 
-import { obtenerAsignaturas, insertarAsignatura, actualizarAsignatura, eliminarAsignatura } from "../../controllers/catalogo/asignaturas.controller";
+import { obtenerPeriodos, insertarPeriodo, actualizarPeriodo, eliminarPeriodo } from "../../controllers/catalogo/periodos.controller";
 
 const router = Router();
 
-router.get('/asignaturas/obtenerAsignaturas', obtenerAsignaturas);
+router.get('/periodos/obtenerPeriodos', obtenerPeriodos);
 
-router.post('/asignaturas/insertarAsignatura', insertarAsignatura);
+router.post('/periodos/insertarPeriodo', insertarPeriodo);
 
-router.put('/asignaturas/actualizarAsignatura', actualizarAsignatura);
+router.put('/periodos/actualizarPeriodo', actualizarPeriodo);
 
-router.delete('/asignaturas/eliminarAsignatura', eliminarAsignatura);
+router.delete('/periodos/eliminarPeriodo', eliminarPeriodo);
 
 export default router;
