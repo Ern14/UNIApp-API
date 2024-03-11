@@ -1,5 +1,5 @@
 import { obtenerDocenteAsignaturaBLL, insertarDocenteAsignaturaBLL, actualizarDocenteAsignaturaBLL, obtenerDocenteAsignaturaxIdBLL } from '../../capas/BLL/operaciones/DocenteAsignatura';
-import { Docente_Asignatura } from '../../modelos/operaciones/docente_asignatura';
+import { DocenteAsignatura } from '../../modelos/Operaciones/DocenteAsignatura';
 
 export const obtenerDocenteAsignatura = async ( req, res ) => {
     try {
@@ -26,7 +26,7 @@ export const insertarDocenteAsignatura = async ( req, res ) => {
     try {
         const fechaHoraActual = new Date();
         const userData = req.body;
-        const modDocenteAsignatura = new Docente_Asignatura(userData);
+        const modDocenteAsignatura = new DocenteAsignatura(userData);
         if (modDocenteAsignatura.idDocente == null || modDocenteAsignatura.idAsignatura == null) {
             throw new Error("Bad request: incomplete information");
         };
@@ -63,7 +63,7 @@ export const actualizarDocenteAsignatura = async ( req, res ) => {
         const idAsignatura = req.body.idAsignatura;
         const userData = await obtenerDocenteAsignaturaxIdBLL(idDocenteAsignatura);
         if (userData.length > 0){
-            const modDocenteAsignatura = new Docente_Asignatura(userData[0]);
+            const modDocenteAsignatura = new DocenteAsignatura(userData[0]);
 
             modDocenteAsignatura.idDocente = idDocente;
             modDocenteAsignatura.idAsignatura = idAsignatura;
@@ -104,7 +104,7 @@ export const eliminarDocenteAsignatura = async ( req, res ) => {
         const idDocenteAsignatura = req.body.idDocenteAsignatura;
         const userData = await obtenerDocenteAsignaturaxIdBLL(idDocenteAsignatura);
         if (userData.length > 0){
-            const modDocenteAsignatura = new Docente_Asignatura(userData[0]);
+            const modDocenteAsignatura = new DocenteAsignatura(userData[0]);
 
             modDocenteAsignatura.Activo = 0;
             modDocenteAsignatura.FechaModificacion = fechaHoraActual;

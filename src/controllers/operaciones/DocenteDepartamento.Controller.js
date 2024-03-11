@@ -1,5 +1,5 @@
 import { obtenerDocenteDepartamentoBLL, insertarDocenteDepartamentoBLL, actualizarDocenteDepartamentoBLL, obtenerDocenteDepartamentoxIdBLL } from '../../capas/BLL/operaciones/DocenteDepartamento';
-import { Docente_Departamento } from '../../modelos/operaciones/docente_departamento';
+import { DocenteDepartamento } from '../../modelos/Operaciones/DocenteDepartamento';
 
 export const obtenerDocenteDepartamento = async ( req, res ) => {
     try {
@@ -26,7 +26,7 @@ export const insertarDocenteDepartamento = async ( req, res ) => {
     try {
         const fechaHoraActual = new Date();
         const userData = req.body;
-        const modDocenteDepartamento = new Docente_Departamento(userData);
+        const modDocenteDepartamento = new DocenteDepartamento(userData);
         if (modDocenteDepartamento.idDocente == null || modDocenteDepartamento.idDepartamento == null) {
             throw new Error("Bad request: incomplete information");
         };
@@ -63,7 +63,7 @@ export const actualizarDocenteDepartamento = async ( req, res ) => {
         const idDepartamento = req.body.idDepartamento;
         const userData = await obtenerDocenteDepartamentoxIdBLL(idDocenteDepartamento);
         if (userData.length > 0){
-            const modDocenteDepartamento = new Docente_Departamento(userData[0]);
+            const modDocenteDepartamento = new DocenteDepartamento(userData[0]);
 
             modDocenteDepartamento.idDocente = idDocente;
             modDocenteDepartamento.idDepartamento = idDepartamento;
@@ -104,7 +104,7 @@ export const eliminarDocenteDepartamento = async ( req, res ) => {
         const idDocenteDepartamento = req.body.idDocenteDepartamento;
         const userData = await obtenerDocenteDepartamentoxIdBLL(idDocenteDepartamento);
         if (userData.length > 0){
-            const modDocenteDepartamento = new Docente_Departamento(userData[0]);
+            const modDocenteDepartamento = new DocenteDepartamento(userData[0]);
 
             modDocenteDepartamento.Activo = 0;
             modDocenteDepartamento.FechaModificacion = fechaHoraActual;

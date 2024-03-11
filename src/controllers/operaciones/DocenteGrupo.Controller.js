@@ -1,5 +1,5 @@
 import { obtenerDocenteGrupoBLL, insertarDocenteGrupoBLL, actualizarDocenteGrupoBLL, obtenerDocenteGrupoxIdBLL } from '../../capas/BLL/operaciones/DocenteGrupo';
-import { Docente_Grupo } from '../../modelos/operaciones/docente_grupo';
+import { DocenteGrupo } from '../../modelos/Operaciones/DocenteGrupo';
 
 export const obtenerDocenteGrupo = async ( req, res ) => {
     try {
@@ -26,7 +26,7 @@ export const insertarDocenteGrupo = async ( req, res ) => {
     try {
         const fechaHoraActual = new Date();
         const userData = req.body;
-        const modDocenteGrupo = new Docente_Grupo(userData);
+        const modDocenteGrupo = new DocenteGrupo(userData);
         if (modDocenteGrupo.idDocente == null || modDocenteGrupo.idGrupo == null) {
             throw new Error("Bad request: incomplete information");
         };
@@ -63,7 +63,7 @@ export const actualizarDocenteGrupo = async ( req, res ) => {
         const idGrupo = req.body.idGrupo;
         const userData = await obtenerDocenteGrupoxIdBLL(idDocenteGrupo);
         if (userData.length > 0){
-            const modDocenteGrupo = new Docente_Grupo(userData[0]);
+            const modDocenteGrupo = new DocenteGrupo(userData[0]);
 
             modDocenteGrupo.idDocente = idDocente;
             modDocenteGrupo.idGrupo = idGrupo;
@@ -104,7 +104,7 @@ export const eliminarDocenteGrupo = async ( req, res ) => {
         const idDocenteGrupo = req.body.idDocenteGrupo;
         const userData = await obtenerDocenteGrupoxIdBLL(idDocenteGrupo);
         if (userData.length > 0){
-            const modDocenteGrupo = new Docente_Grupo(userData[0]);
+            const modDocenteGrupo = new DocenteGrupo(userData[0]);
 
             modDocenteGrupo.Activo = 0;
             modDocenteGrupo.FechaModificacion = fechaHoraActual;

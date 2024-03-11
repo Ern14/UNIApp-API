@@ -1,5 +1,5 @@
 import { obtenerAsistenciasBLL, insertarAsistenciaBLL, actualizarAsistenciaBLL, obtenerAsistenciaxIdBLL } from '../../capas/BLL/catalogo/asistencias';
-import { Asistencias } from '../../modelos/catalogo/asistencias';
+import { Asistencias } from '../../modelos/Catalogo/Asistencias';
 
 export const obtenerAsistencias = async ( req, res ) => {
     try {

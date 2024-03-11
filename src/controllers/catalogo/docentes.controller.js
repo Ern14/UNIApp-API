@@ -1,5 +1,5 @@
 import { obtenerDocentesBLL, insertarDocenteBLL, actualizarDocenteBLL, obtenerDocentexIdBLL } from '../../capas/BLL/catalogo/docentes';
-import { Docentes } from '../../modelos/catalogo/docentes';
+import { Docentes } from '../../modelos/Catalogo/Docentes';
 
 export const obtenerDocentes = async ( req, res ) => {
     try {

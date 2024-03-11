@@ -1,5 +1,5 @@
 import { obtenerUsuariosBLL, insertarUsuariosBLL, filtrarUsuariosxCorreoBLL, validarUsuarioxCorreoBLL, actualizarUsuariosBLL, filtrarUsuariosxIdBLL } from '../capas/BLL/usuarios';
-import { Usuarios } from "../modelos/seguridad/usuarios";
+import { Usuarios } from "../modelos/Seguridad/Usuarios";
 
 export const obtenerUsuarios = async ( req, res ) => {
     try {

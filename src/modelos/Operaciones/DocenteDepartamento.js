@@ -1,8 +1,8 @@
-export class Docente_Grupo{
+export class DocenteDepartamento{
     constructor(userData) {
-        this.idDocenteGrupo = userData.idDocenteGrupo;
+        this.idDocenteDepartamento = userData.idDocenteDepartamento;
         this.idDocente = userData.idDocente;
-        this.idGrupo = userData.idGrupo;
+        this.idDepartamento = userData.idDepartamento;
         this.Activo = userData.Activo;
         this.FechaCreacion = userData.FechaCreacion;
         this.FechaModificacion = userData.FechaModificacion;
