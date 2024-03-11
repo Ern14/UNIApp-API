@@ -1,4 +1,4 @@
-import { obtenerPeriodosBLL, insertarPeriodoBLL, actualizarPeriodoBLL, obtenerPeriodoxIdBLL } from '../../Library/BLL/catalogo/periodos';
+import { obtenerPeriodosBLL, insertarPeriodoBLL, actualizarPeriodoBLL, obtenerPeriodoxIdBLL } from '../../Library/BLL/Catalogo/Periodos';
 import { Periodos } from '../../Library/Models/Catalogo/Periodos';
 
 export const obtenerPeriodos = async ( req, res ) => {

@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { obtenerAsistencias, insertarAsistencia, actualizarAsistencia, eliminarAsistencia } from "../../Controllers/catalogo/asistencias.controller";
+import { obtenerAsistencias, insertarAsistencia, actualizarAsistencia, eliminarAsistencia } from "../../Controllers/Catalogo/Asistencias.Controller";
 
 const router = Router();
 

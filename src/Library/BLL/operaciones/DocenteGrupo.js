@@ -1,4 +1,4 @@
-import { obtenerDocenteGrupoDAL, insertarDocenteGrupoDAL, actualizarDocenteGrupoDAL, obtenerDocenteGrupoxIdDAL } from "../../DAL/operaciones/DocenteGrupo";
+import { obtenerDocenteGrupoDAL, insertarDocenteGrupoDAL, actualizarDocenteGrupoDAL, obtenerDocenteGrupoxIdDAL } from "../../DAL/Operaciones/DocenteGrupo";
 
 export const obtenerDocenteGrupoBLL = async () => {
     try {

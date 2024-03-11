@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { obtenerUsuarios, insertarUsuarios, filtrarUsuariosxCorreo, validarUsuarioxCorreo, actualizarUsuarios } from "../../Controllers/Seguridad/usuarios.controller";
+import { obtenerUsuarios, insertarUsuarios, filtrarUsuariosxCorreo, validarUsuarioxCorreo, actualizarUsuarios } from "../../Controllers/Seguridad/Usuarios.Controller";
 
 const router = Router();
 

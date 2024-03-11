@@ -1,6 +1,5 @@
 import sql from 'mssql';
 
-//DB Configuration
 const dbSettings = {
     user: "sa",
     password: "123",
@@ -13,13 +12,12 @@ const dbSettings = {
     }
 };
 
-//Connection test
 export async function getConnection(){
     try {
         const pool = await sql.connect(dbSettings);
         return pool;
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 }
 

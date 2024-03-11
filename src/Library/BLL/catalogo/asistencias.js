@@ -1,4 +1,4 @@
-import { obtenerAsistenciasDAL, insertarAsistenciaDAL, actualizarAsistenciaDAL, obtenerAsistenciaxIdDAL } from "../../DAL/catalogo/asistencias";
+import { obtenerAsistenciasDAL, insertarAsistenciaDAL, actualizarAsistenciaDAL, obtenerAsistenciaxIdDAL } from "../../DAL/Catalogo/Asistencias";
 
 export const obtenerAsistenciasBLL = async () => {
     try {

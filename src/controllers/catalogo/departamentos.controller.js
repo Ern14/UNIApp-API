@@ -1,4 +1,4 @@
-import { obtenerDepartamentosBLL, insertarDepartamentoBLL, actualizarDepartamentoBLL, obtenerDepartamentoxIdBLL } from '../../Library/BLL/catalogo/departamentos';
+import { obtenerDepartamentosBLL, insertarDepartamentoBLL, actualizarDepartamentoBLL, obtenerDepartamentoxIdBLL } from '../../Library/BLL/Catalogo/Departamentos';
 import { Departamentos } from '../../Library/Models/Catalogo/Departamentos';
 
 export const obtenerDepartamentos = async ( req, res ) => {

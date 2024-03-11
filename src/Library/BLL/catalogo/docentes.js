@@ -1,4 +1,4 @@
-import { obtenerDocentesDAL, insertarDocenteDAL, actualizarDocenteDAL, obtenerDocentexIdDAL } from "../../DAL/catalogo/docentes";
+import { obtenerDocentesDAL, insertarDocenteDAL, actualizarDocenteDAL, obtenerDocentexIdDAL } from "../../DAL/Catalogo/Docentes";
 
 export const obtenerDocentesBLL = async () => {
     try {

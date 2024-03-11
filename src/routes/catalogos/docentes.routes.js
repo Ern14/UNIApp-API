@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { obtenerDocentes, insertarDocente, actualizarDocente, eliminarDocente } from "../../Controllers/catalogo/docentes.controller";
+import { obtenerDocentes, insertarDocente, actualizarDocente, eliminarDocente } from "../../Controllers/Catalogo/Docentes.Controller";
 
 const router = Router();
 

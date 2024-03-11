@@ -1,4 +1,4 @@
-import { obtenerDocenteAsignaturaDAL, insertarDocenteAsignaturaDAL, actualizarDocenteAsignaturaDAL, obtenerDocenteAsignaturaxIdDAL } from "../../DAL/operaciones/DocenteAsignatura";
+import { obtenerDocenteAsignaturaDAL, insertarDocenteAsignaturaDAL, actualizarDocenteAsignaturaDAL, obtenerDocenteAsignaturaxIdDAL } from "../../DAL/Operaciones/DocenteAsignatura";
 
 export const obtenerDocenteAsignaturaBLL = async () => {
     try {

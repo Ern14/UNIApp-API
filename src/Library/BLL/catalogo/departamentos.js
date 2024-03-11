@@ -1,4 +1,4 @@
-import { obtenerDepartamentosDAL, insertarDepartamentoDAL, actualizarDepartamentoDAL, obtenerDepartamentoxIdDAL } from "../../DAL/catalogo/departamentos";
+import { obtenerDepartamentosDAL, insertarDepartamentoDAL, actualizarDepartamentoDAL, obtenerDepartamentoxIdDAL } from "../../DAL/Catalogo/Departamentos";
 
 export const obtenerDepartamentosBLL = async () => {
     try {

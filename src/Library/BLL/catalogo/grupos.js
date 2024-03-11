@@ -1,4 +1,4 @@
-import { obtenerGruposDAL, insertarGrupoDAL, actualizarGrupoDAL, obtenerGrupoxIdDAL } from "../../DAL/catalogo/grupos";
+import { obtenerGruposDAL, insertarGrupoDAL, actualizarGrupoDAL, obtenerGrupoxIdDAL } from "../../DAL/Catalogo/Grupos";
 
 export const obtenerGruposBLL = async () => {
     try {

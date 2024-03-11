@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { obtenerPeriodos, insertarPeriodo, actualizarPeriodo, eliminarPeriodo } from "../../Controllers/catalogo/periodos.controller";
+import { obtenerPeriodos, insertarPeriodo, actualizarPeriodo, eliminarPeriodo } from "../../Controllers/Catalogo/Periodos.Controller";
 
 const router = Router();
 

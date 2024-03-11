@@ -1,4 +1,4 @@
-import { obtenerUsuariosBLL, insertarUsuariosBLL, filtrarUsuariosxCorreoBLL, validarUsuarioxCorreoBLL, actualizarUsuariosBLL, filtrarUsuariosxIdBLL } from '../../Library/BLL/Seguridad/usuarios';
+import { obtenerUsuariosBLL, insertarUsuariosBLL, filtrarUsuariosxCorreoBLL, validarUsuarioxCorreoBLL, actualizarUsuariosBLL, filtrarUsuariosxIdBLL } from '../../Library/BLL/Seguridad/Usuarios';
 import { Usuarios } from "../../Library/Models/Seguridad/Usuarios";
 
 export const obtenerUsuarios = async ( req, res ) => {

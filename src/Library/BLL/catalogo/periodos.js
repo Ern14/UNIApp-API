@@ -1,4 +1,4 @@
-import { obtenerPeriodosDAL, insertarPeriodoDAL, actualizarPeriodoDAL, obtenerPeriodoxIdDAL } from "../../DAL/catalogo/periodos";
+import { obtenerPeriodosDAL, insertarPeriodoDAL, actualizarPeriodoDAL, obtenerPeriodoxIdDAL } from "../../DAL/Catalogo/Periodos";
 
 export const obtenerPeriodosBLL = async () => {
     try {
