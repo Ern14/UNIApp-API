@@ -1,5 +1,5 @@
-import { obtenerPeriodosBLL, insertarPeriodoBLL, actualizarPeriodoBLL, obtenerPeriodoxIdBLL } from '../../capas/BLL/catalogo/periodos';
-import { Periodos } from '../../modelos/Catalogo/Periodos';
+import { obtenerPeriodosBLL, insertarPeriodoBLL, actualizarPeriodoBLL, obtenerPeriodoxIdBLL } from '../../Library/BLL/catalogo/periodos';
+import { Periodos } from '../../Library/Models/Catalogo/Periodos';
 
 export const obtenerPeriodos = async ( req, res ) => {
     try {

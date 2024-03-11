@@ -1,5 +1,5 @@
-import { obtenerGruposBLL, insertarGrupoBLL, actualizarGrupoBLL, obtenerGrupoxIdBLL } from '../../capas/BLL/catalogo/grupos';
-import { Grupos } from '../../modelos/Catalogo/Grupos';
+import { obtenerGruposBLL, insertarGrupoBLL, actualizarGrupoBLL, obtenerGrupoxIdBLL } from '../../Library/BLL/catalogo/grupos';
+import { Grupos } from '../../Library/Models/Catalogo/Grupos';
 
 export const obtenerGrupos = async ( req, res ) => {
     try {

@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { obtenerAsignaturas, insertarAsignatura, actualizarAsignatura, eliminarAsignatura } from "../../controllers/catalogo/asignaturas.controller";
+import { obtenerAsignaturas, insertarAsignatura, actualizarAsignatura, eliminarAsignatura } from "../../Controllers/catalogo/asignaturas.controller";
 
 
 const router = Router();

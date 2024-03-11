@@ -1,5 +1,5 @@
-import { obtenerAsignaturasBLL, insertarAsignaturaBLL, actualizarAsignaturaBLL, obtenerAsignaturaxIdBLL } from '../../capas/BLL/catalogo/asignaturas';
-import { Asignaturas } from '../../modelos/Catalogo/Asignaturas';
+import { obtenerAsignaturasBLL, insertarAsignaturaBLL, actualizarAsignaturaBLL, obtenerAsignaturaxIdBLL } from '../../Library/BLL/catalogo/asignaturas';
+import { Asignaturas } from '../../Library/Models/Catalogo/Asignaturas';
 
 export const obtenerAsignaturas = async ( req, res ) => {
     try {

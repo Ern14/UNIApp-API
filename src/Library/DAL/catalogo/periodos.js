@@ -1,4 +1,4 @@
-import { getConnection, sql } from "../../../database/connection";
+import { getConnection, sql } from "../../Database/Connection";
 
 export const obtenerPeriodosDAL = async () => {
     try {

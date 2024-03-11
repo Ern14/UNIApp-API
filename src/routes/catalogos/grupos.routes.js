@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { obtenerGrupos, insertarGrupo, actualizarGrupo, eliminarGrupo } from "../../controllers/catalogo/grupos.controller";
+import { obtenerGrupos, insertarGrupo, actualizarGrupo, eliminarGrupo } from "../../Controllers/catalogo/grupos.controller";
 
 const router = Router();
 

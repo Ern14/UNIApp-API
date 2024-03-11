@@ -1,5 +1,5 @@
-import { obtenerDocenteGrupoBLL, insertarDocenteGrupoBLL, actualizarDocenteGrupoBLL, obtenerDocenteGrupoxIdBLL } from '../../capas/BLL/operaciones/DocenteGrupo';
-import { DocenteGrupo } from '../../modelos/Operaciones/DocenteGrupo';
+import { obtenerDocenteGrupoBLL, insertarDocenteGrupoBLL, actualizarDocenteGrupoBLL, obtenerDocenteGrupoxIdBLL } from '../../Library/BLL/operaciones/DocenteGrupo';
+import { DocenteGrupo } from '../../Library/Models/Operaciones/DocenteGrupo';
 
 export const obtenerDocenteGrupo = async ( req, res ) => {
     try {
