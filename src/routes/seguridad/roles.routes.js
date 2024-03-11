@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { obtenerRoles, insertarRoles, actualizarRoles, eliminarRoles } from "../../Controllers/roles.controller";
+import { obtenerRoles, insertarRoles, actualizarRoles, eliminarRoles } from "../../Controllers/Seguridad/roles.controller";
 
 const router = Router();
 

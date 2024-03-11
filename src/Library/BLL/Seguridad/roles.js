@@ -1,4 +1,4 @@
-import { obtenerRolesDAL, insertarRolesDAL, actualizarRolesDAL, obtenerRolxIdDAL } from "../DAL/roles";
+import { obtenerRolesDAL, insertarRolesDAL, actualizarRolesDAL, obtenerRolxIdDAL } from "../../DAL/Seguridad/roles";
 
 export const obtenerRolesBLL = async () => {
     try {

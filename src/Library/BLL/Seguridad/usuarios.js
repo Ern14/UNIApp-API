@@ -1,5 +1,5 @@
 import bcryptjs from 'bcryptjs';
-import { obtenerUsuariosDAL, insertarUsuariosDAL, filtrarUsuariosxCorreoDAL, validarUsuarioxCorreoDAL, actualizarUsuariosDAL, filtrarUsuariosxIdDAL } from "../DAL/usuarios";
+import { obtenerUsuariosDAL, insertarUsuariosDAL, filtrarUsuariosxCorreoDAL, validarUsuarioxCorreoDAL, actualizarUsuariosDAL, filtrarUsuariosxIdDAL } from "../../DAL/Seguridad/usuarios";
 const fs = require('fs');
 
 

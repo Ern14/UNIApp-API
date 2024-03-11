@@ -1,4 +1,4 @@
-import { getConnection, sql } from "../Database/Connection";
+import { getConnection, sql } from "../../Database/Connection";
 
 export const obtenerRolesDAL = async () => {
     try {
