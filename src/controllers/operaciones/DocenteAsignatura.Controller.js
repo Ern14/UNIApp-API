@@ -26,18 +26,18 @@ export const insertarDocenteAsignatura = async ( req, res ) => {
     try {
         const fechaHoraActual = new Date();
         const userData = req.body;
-        const modAsignatura = new Docente_Asignatura(userData);
-        if (modAsignatura.idDocente == null || modAsignatura.idAsignatura == null) {
+        const modDocenteAsignatura = new Docente_Asignatura(userData);
+        if (modDocenteAsignatura.idDocente == null || modDocenteAsignatura.idAsignatura == null) {
             throw new Error("Bad request: incomplete information");
         };
         
-        modAsignatura.Activo = 1;
-        modAsignatura.FechaCreacion = fechaHoraActual;
-        modAsignatura.FechaModificacion = fechaHoraActual;
-        modAsignatura.UsuarioCreacion = 1;
-        modAsignatura.UsuarioModificacion = 1;
+        modDocenteAsignatura.Activo = 1;
+        modDocenteAsignatura.FechaCreacion = fechaHoraActual;
+        modDocenteAsignatura.FechaModificacion = fechaHoraActual;
+        modDocenteAsignatura.UsuarioCreacion = 1;
+        modDocenteAsignatura.UsuarioModificacion = 1;
 
-        const data = await insertarDocenteAsignaturaBLL(modAsignatura);
+        const data = await insertarDocenteAsignaturaBLL(modDocenteAsignatura);
         const response = {
             status: 'Exito',
             statusCode: 200,
@@ -65,7 +65,6 @@ export const actualizarDocenteAsignatura = async ( req, res ) => {
         if (userData.length > 0){
             const modDocenteAsignatura = new Docente_Asignatura(userData[0]);
 
-            modDocenteAsignatura.idAsignatura = idAsignatura;
             modDocenteAsignatura.idDocente = idDocente;
             modDocenteAsignatura.idAsignatura = idAsignatura;
             modDocenteAsignatura.Activo = 1;
