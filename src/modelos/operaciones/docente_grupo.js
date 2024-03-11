@@ -1,5 +1,6 @@
 export class Docente_Grupo{
     constructor(userData) {
+        this.idDocenteGrupo = userData.idDocenteGrupo;
         this.idDocente = userData.idDocente;
         this.idGrupo = userData.idGrupo;
         this.Activo = userData.Activo;

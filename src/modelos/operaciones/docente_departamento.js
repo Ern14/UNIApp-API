@@ -1,5 +1,6 @@
 export class Docente_Departamento{
     constructor(userData) {
+        this.idDocenteDepartamento = userData.idDocenteDepartamento;
         this.idDocente = userData.idDocente;
         this.idDepartamento = userData.idDepartamento;
         this.Activo = userData.Activo;
