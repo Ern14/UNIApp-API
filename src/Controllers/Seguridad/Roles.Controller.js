@@ -26,6 +26,7 @@ export const insertarRoles = async ( req, res ) => {
     try {
         const fechaHoraActual = new Date();
         const userData = req.body;
+        const usuarioLog = req.decoded;
         const modRoles = new Roles(userData);
         if (modRoles.Nombre == null) {
             throw new Error("Bad request: incomplete information");
@@ -34,8 +35,8 @@ export const insertarRoles = async ( req, res ) => {
         modRoles.Activo = 1;
         modRoles.FechaCreacion = fechaHoraActual;
         modRoles.FechaModificacion = fechaHoraActual;
-        modRoles.UsuarioCreacion = 1;
-        modRoles.UsuarioModificacion = 1;
+        modRoles.UsuarioCreacion = usuarioLog.idUsuario;
+        modRoles.UsuarioModificacion = usuarioLog.idUsuario;
 
         const data = await insertarRolesBLL(modRoles);
         const response = {
@@ -61,6 +62,7 @@ export const actualizarRoles = async ( req, res ) => {
         const idRol = req.body.idRol;
         const Nombre = req.body.Nombre;
         const Descripcion = req.body.Descripcion;
+        const usuarioLog = req.decoded;
         const userData = await obtenerRolxIdBLL(idRol);
 
         if (userData.length > 0){
@@ -71,7 +73,7 @@ export const actualizarRoles = async ( req, res ) => {
             modRoles.Descripcion = Descripcion;
             modRoles.Activo = 1;
             modRoles.FechaModificacion = fechaHoraActual;
-            modRoles.UsuarioModificacion = 1;
+            modRoles.UsuarioModificacion = usuarioLog.idUsuario;
     
             const data = await actualizarRolesBLL(modRoles);
 
@@ -105,6 +107,7 @@ export const eliminarRoles = async ( req, res ) => {
     try {
         const fechaHoraActual = new Date();
         const idRol = req.body.idRol;
+        const usuarioLog = req.decoded;
         const userData = await obtenerRolxIdBLL(idRol);
 
         if (userData.length > 0){
@@ -112,7 +115,7 @@ export const eliminarRoles = async ( req, res ) => {
 
             modRoles.Activo = 0;
             modRoles.FechaModificacion = fechaHoraActual;
-            modRoles.UsuarioModificacion = 1;
+            modRoles.UsuarioModificacion = usuarioLog.idUsuario;
     
             const data = await actualizarRolesBLL(modRoles);
 

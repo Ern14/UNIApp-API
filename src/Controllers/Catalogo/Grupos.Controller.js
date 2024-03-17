@@ -24,6 +24,8 @@ export const obtenerGrupos = async ( req, res ) => {
 
 export const insertarGrupo = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const userData = req.body;
         const modGrupo = new Grupos(userData);
@@ -34,8 +36,8 @@ export const insertarGrupo = async ( req, res ) => {
         modGrupo.Activo = 1;
         modGrupo.FechaCreacion = fechaHoraActual;
         modGrupo.FechaModificacion = fechaHoraActual;
-        modGrupo.UsuarioCreacion = 1;
-        modGrupo.UsuarioModificacion = 1;
+        modGrupo.UsuarioCreacion = usuarioLog.idUsuario;
+        modGrupo.UsuarioModificacion = usuarioLog.idUsuario;
 
         const data = await insertarGrupoBLL(modGrupo);
         const response = {
@@ -57,6 +59,8 @@ export const insertarGrupo = async ( req, res ) => {
 
 export const actualizarGrupo = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const idGrupo = req.body.idGrupo;
         const Nombre = req.body.Nombre;
@@ -69,7 +73,7 @@ export const actualizarGrupo = async ( req, res ) => {
             modGrupo.Nombre = Nombre;
             modGrupo.Activo = 1;
             modGrupo.FechaModificacion = fechaHoraActual;
-            modGrupo.UsuarioModificacion = 1;
+            modGrupo.UsuarioModificacion = usuarioLog.idUsuario;
     
             const data = await actualizarGrupoBLL(modGrupo);
 
@@ -101,6 +105,8 @@ export const actualizarGrupo = async ( req, res ) => {
 
 export const eliminarGrupo = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const idGrupo = req.body.idGrupo;
         const userData = await obtenerGrupoxIdBLL(idGrupo);
@@ -110,7 +116,7 @@ export const eliminarGrupo = async ( req, res ) => {
 
             modGrupo.Activo = 0;
             modGrupo.FechaModificacion = fechaHoraActual;
-            modGrupo.UsuarioModificacion = 1;
+            modGrupo.UsuarioModificacion = usuarioLog.idUsuario;
     
             const data = await actualizarGrupoBLL(modGrupo);
 

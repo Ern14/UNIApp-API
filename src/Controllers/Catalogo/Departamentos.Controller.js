@@ -24,6 +24,8 @@ export const obtenerDepartamentos = async ( req, res ) => {
 
 export const insertarDepartamento = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const userData = req.body;
         const modDepartamento = new Departamentos(userData);
@@ -34,8 +36,8 @@ export const insertarDepartamento = async ( req, res ) => {
         modDepartamento.Activo = 1;
         modDepartamento.FechaCreacion = fechaHoraActual;
         modDepartamento.FechaModificacion = fechaHoraActual;
-        modDepartamento.UsuarioCreacion = 1;
-        modDepartamento.UsuarioModificacion = 1;
+        modDepartamento.UsuarioCreacion = usuarioLog.idUsuario;
+        modDepartamento.UsuarioModificacion = usuarioLog.idUsuario;
 
         const data = await insertarDepartamentoBLL(modDepartamento);
         const response = {
@@ -57,6 +59,8 @@ export const insertarDepartamento = async ( req, res ) => {
 
 export const actualizarDepartamento = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const idDepartamento = req.body.idDepartamento;
         const Nombre = req.body.Nombre;
@@ -67,7 +71,7 @@ export const actualizarDepartamento = async ( req, res ) => {
             modDepartamento.Nombre = Nombre;
             modDepartamento.Activo = 1;
             modDepartamento.FechaModificacion = fechaHoraActual;
-            modDepartamento.UsuarioModificacion = 1;
+            modDepartamento.UsuarioModificacion = usuarioLog.idUsuario;
             const data = await actualizarDepartamentoBLL(modDepartamento);
 
             const response = {
@@ -98,6 +102,8 @@ export const actualizarDepartamento = async ( req, res ) => {
 
 export const eliminarDepartamento = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+        
         const fechaHoraActual = new Date();
         const idDepartamento = req.body.idDepartamento;
         const userData = await obtenerDepartamentoxIdBLL(idDepartamento);
@@ -106,7 +112,7 @@ export const eliminarDepartamento = async ( req, res ) => {
 
             modDepartamento.Activo = 0;
             modDepartamento.FechaModificacion = fechaHoraActual;
-            modDepartamento.UsuarioModificacion = 1;
+            modDepartamento.UsuarioModificacion = usuarioLog.idUsuario;
     
             const data = await actualizarDepartamentoBLL(modDepartamento);
 

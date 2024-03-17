@@ -2,15 +2,16 @@ import { Router } from "express";
 
 import { obtenerAsignaturas, insertarAsignatura, actualizarAsignatura, eliminarAsignatura } from "../../Controllers/Catalogo/Asignaturas.Controller";
 
+const verificarToken = require('../../Authorization/AuthMiddleware'); 
 
 const router = Router();
 
-router.get('/asignaturas/obtenerAsignaturas', obtenerAsignaturas);
+router.get('/asignaturas/obtenerAsignaturas', verificarToken, obtenerAsignaturas);
 
-router.post('/asignaturas/insertarAsignatura', insertarAsignatura);
+router.post('/asignaturas/insertarAsignatura', verificarToken, insertarAsignatura);
 
-router.put('/asignaturas/actualizarAsignatura', actualizarAsignatura);
+router.put('/asignaturas/actualizarAsignatura', verificarToken, actualizarAsignatura);
 
-router.delete('/asignaturas/eliminarAsignatura', eliminarAsignatura);
+router.delete('/asignaturas/eliminarAsignatura', verificarToken, eliminarAsignatura);
 
 export default router;

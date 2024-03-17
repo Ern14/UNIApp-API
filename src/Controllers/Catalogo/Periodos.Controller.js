@@ -24,6 +24,8 @@ export const obtenerPeriodos = async ( req, res ) => {
 
 export const insertarPeriodo = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const userData = req.body;
         const modPeriodo = new Periodos(userData);
@@ -34,8 +36,8 @@ export const insertarPeriodo = async ( req, res ) => {
         modPeriodo.Activo = 1;
         modPeriodo.FechaCreacion = fechaHoraActual;
         modPeriodo.FechaModificacion = fechaHoraActual;
-        modPeriodo.UsuarioCreacion = 1;
-        modPeriodo.UsuarioModificacion = 1;
+        modPeriodo.UsuarioCreacion = usuarioLog.idUsuario;
+        modPeriodo.UsuarioModificacion = usuarioLog.idUsuario;
 
         const data = await insertarPeriodoBLL(modPeriodo);
         const response = {
@@ -57,6 +59,8 @@ export const insertarPeriodo = async ( req, res ) => {
 
 export const actualizarPeriodo = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const idPeriodo = req.body.idPeriodo;
         const Nombre = req.body.Nombre;
@@ -68,7 +72,7 @@ export const actualizarPeriodo = async ( req, res ) => {
             modPeriodo.Nombre = Nombre;
             modPeriodo.Activo = 1;
             modPeriodo.FechaModificacion = fechaHoraActual;
-            modPeriodo.UsuarioModificacion = 1;
+            modPeriodo.UsuarioModificacion = usuarioLog.idUsuario;
             const data = await actualizarPeriodoBLL(modPeriodo);
 
             const response = {
@@ -99,6 +103,8 @@ export const actualizarPeriodo = async ( req, res ) => {
 
 export const eliminarPeriodo = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const idPeriodo = req.body.idPeriodo;
         const userData = await obtenerPeriodoxIdBLL(idPeriodo);
@@ -107,7 +113,7 @@ export const eliminarPeriodo = async ( req, res ) => {
 
             modPeriodo.Activo = 0;
             modPeriodo.FechaModificacion = fechaHoraActual;
-            modPeriodo.UsuarioModificacion = 1;
+            modPeriodo.UsuarioModificacion = usuarioLog.idUsuario;
     
             const data = await actualizarPeriodoBLL(modPeriodo);
 

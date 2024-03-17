@@ -1,4 +1,9 @@
-import { obtenerDocenteAsignaturaBLL, insertarDocenteAsignaturaBLL, actualizarDocenteAsignaturaBLL, obtenerDocenteAsignaturaxIdBLL } from '../../Library/BLL/Operaciones/DocenteAsignatura';
+import { 
+    obtenerDocenteAsignaturaBLL, 
+    insertarDocenteAsignaturaBLL, 
+    actualizarDocenteAsignaturaBLL, 
+    obtenerDocenteAsignaturaxIdBLL 
+} from '../../Library/BLL/Operaciones/DocenteAsignatura';
 import { DocenteAsignatura } from '../../Library/Models/Operaciones/DocenteAsignatura';
 
 export const obtenerDocenteAsignatura = async ( req, res ) => {
@@ -24,6 +29,8 @@ export const obtenerDocenteAsignatura = async ( req, res ) => {
 
 export const insertarDocenteAsignatura = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const userData = req.body;
         const modDocenteAsignatura = new DocenteAsignatura(userData);
@@ -34,8 +41,8 @@ export const insertarDocenteAsignatura = async ( req, res ) => {
         modDocenteAsignatura.Activo = 1;
         modDocenteAsignatura.FechaCreacion = fechaHoraActual;
         modDocenteAsignatura.FechaModificacion = fechaHoraActual;
-        modDocenteAsignatura.UsuarioCreacion = 1;
-        modDocenteAsignatura.UsuarioModificacion = 1;
+        modDocenteAsignatura.UsuarioCreacion = usuarioLog.idUsuario;
+        modDocenteAsignatura.UsuarioModificacion = usuarioLog.idUsuario;
 
         const data = await insertarDocenteAsignaturaBLL(modDocenteAsignatura);
         const response = {
@@ -57,6 +64,8 @@ export const insertarDocenteAsignatura = async ( req, res ) => {
 
 export const actualizarDocenteAsignatura = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const idDocenteAsignatura = req.body.idDocenteAsignatura;
         const idDocente = req.body.idDocente;
@@ -69,7 +78,7 @@ export const actualizarDocenteAsignatura = async ( req, res ) => {
             modDocenteAsignatura.idAsignatura = idAsignatura;
             modDocenteAsignatura.Activo = 1;
             modDocenteAsignatura.FechaModificacion = fechaHoraActual;
-            modDocenteAsignatura.UsuarioModificacion = 1;
+            modDocenteAsignatura.UsuarioModificacion = usuarioLog.idUsuario;
             const data = await actualizarDocenteAsignaturaBLL(modDocenteAsignatura);
 
             const response = {
@@ -100,6 +109,8 @@ export const actualizarDocenteAsignatura = async ( req, res ) => {
 
 export const eliminarDocenteAsignatura = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const idDocenteAsignatura = req.body.idDocenteAsignatura;
         const userData = await obtenerDocenteAsignaturaxIdBLL(idDocenteAsignatura);
@@ -108,7 +119,7 @@ export const eliminarDocenteAsignatura = async ( req, res ) => {
 
             modDocenteAsignatura.Activo = 0;
             modDocenteAsignatura.FechaModificacion = fechaHoraActual;
-            modDocenteAsignatura.UsuarioModificacion = 1;
+            modDocenteAsignatura.UsuarioModificacion = usuarioLog.idUsuario;
     
             const data = await actualizarDocenteAsignaturaBLL(modDocenteAsignatura);
 

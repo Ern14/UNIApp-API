@@ -24,6 +24,8 @@ export const obtenerDocentes = async ( req, res ) => {
 
 export const insertarDocente = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const userData = req.body;
         const modDocente = new Docentes(userData);
@@ -34,8 +36,8 @@ export const insertarDocente = async ( req, res ) => {
         modDocente.Activo = 1;
         modDocente.FechaCreacion = fechaHoraActual;
         modDocente.FechaModificacion = fechaHoraActual;
-        modDocente.UsuarioCreacion = 1;
-        modDocente.UsuarioModificacion = 1;
+        modDocente.UsuarioCreacion = usuarioLog.idUsuario;
+        modDocente.UsuarioModificacion = usuarioLog.idUsuario;
 
         const data = await insertarDocenteBLL(modDocente);
         const response = {
@@ -57,6 +59,8 @@ export const insertarDocente = async ( req, res ) => {
 
 export const actualizarDocente = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const idDocente = req.body.idDocente;
         const Nombre = req.body.Nombre;
@@ -71,7 +75,7 @@ export const actualizarDocente = async ( req, res ) => {
             modDocente.Apellido = Apellido;
             modDocente.Activo = 1;
             modDocente.FechaModificacion = fechaHoraActual;
-            modDocente.UsuarioModificacion = 1;
+            modDocente.UsuarioModificacion = usuarioLog.idUsuario;
     
             const data = await actualizarDocenteBLL(modDocente);
 
@@ -103,6 +107,8 @@ export const actualizarDocente = async ( req, res ) => {
 
 export const eliminarDocente = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const idDocente = req.body.idDocente;
         const userData = await obtenerDocentexIdBLL(idDocente);
@@ -112,7 +118,7 @@ export const eliminarDocente = async ( req, res ) => {
 
             modDocente.Activo = 0;
             modDocente.FechaModificacion = fechaHoraActual;
-            modDocente.UsuarioModificacion = 1;
+            modDocente.UsuarioModificacion = usuarioLog.idUsuario;
     
             const data = await actualizarDocenteBLL(modDocente);
 

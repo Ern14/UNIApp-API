@@ -24,6 +24,8 @@ export const obtenerAsistencias = async ( req, res ) => {
 
 export const insertarAsistencia = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const fechaActual = `${fechaHoraActual.getFullYear()}-${(fechaHoraActual.getMonth() + 1).toString().padStart(2, '0')}-${fechaHoraActual.getDate().toString().padStart(2, '0')}`;
         const userData = req.body;

@@ -24,6 +24,8 @@ export const obtenerDocenteGrupo = async ( req, res ) => {
 
 export const insertarDocenteGrupo = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const userData = req.body;
         const modDocenteGrupo = new DocenteGrupo(userData);
@@ -34,8 +36,8 @@ export const insertarDocenteGrupo = async ( req, res ) => {
         modDocenteGrupo.Activo = 1;
         modDocenteGrupo.FechaCreacion = fechaHoraActual;
         modDocenteGrupo.FechaModificacion = fechaHoraActual;
-        modDocenteGrupo.UsuarioCreacion = 1;
-        modDocenteGrupo.UsuarioModificacion = 1;
+        modDocenteGrupo.UsuarioCreacion = usuarioLog.idUsuario;
+        modDocenteGrupo.UsuarioModificacion = usuarioLog.idUsuario;
 
         const data = await insertarDocenteGrupoBLL(modDocenteGrupo);
         const response = {
@@ -57,6 +59,8 @@ export const insertarDocenteGrupo = async ( req, res ) => {
 
 export const actualizarDocenteGrupo = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const idDocenteGrupo = req.body.idDocenteGrupo;
         const idDocente = req.body.idDocente;
@@ -69,7 +73,7 @@ export const actualizarDocenteGrupo = async ( req, res ) => {
             modDocenteGrupo.idGrupo = idGrupo;
             modDocenteGrupo.Activo = 1;
             modDocenteGrupo.FechaModificacion = fechaHoraActual;
-            modDocenteGrupo.UsuarioModificacion = 1;
+            modDocenteGrupo.UsuarioModificacion = usuarioLog.idUsuario;
             const data = await actualizarDocenteGrupoBLL(modDocenteGrupo);
 
             const response = {
@@ -100,6 +104,8 @@ export const actualizarDocenteGrupo = async ( req, res ) => {
 
 export const eliminarDocenteGrupo = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const fechaHoraActual = new Date();
         const idDocenteGrupo = req.body.idDocenteGrupo;
         const userData = await obtenerDocenteGrupoxIdBLL(idDocenteGrupo);
@@ -108,7 +114,7 @@ export const eliminarDocenteGrupo = async ( req, res ) => {
 
             modDocenteGrupo.Activo = 0;
             modDocenteGrupo.FechaModificacion = fechaHoraActual;
-            modDocenteGrupo.UsuarioModificacion = 1;
+            modDocenteGrupo.UsuarioModificacion = usuarioLog.idUsuario;
     
             const data = await actualizarDocenteGrupoBLL(modDocenteGrupo);
 

@@ -2,14 +2,16 @@ import { Router } from "express";
 
 import { obtenerAsistencias, insertarAsistencia, actualizarAsistencia, eliminarAsistencia } from "../../Controllers/Catalogo/Asistencias.Controller";
 
+const verificarToken = require('../../Authorization/AuthMiddleware');
+
 const router = Router();
 
-router.get('/asistencias/obtenerAsistencias', obtenerAsistencias);
+router.get('/asistencias/obtenerAsistencias', verificarToken, obtenerAsistencias);
 
-router.post('/asistencias/insertarAsistencia', insertarAsistencia);
+router.post('/asistencias/insertarAsistencia', verificarToken, insertarAsistencia);
 
-router.put('/asistencias/actualizarAsistencia', actualizarAsistencia);
+router.put('/asistencias/actualizarAsistencia', verificarToken, actualizarAsistencia);
 
-router.delete('/asistencias/eliminarAsistencia', eliminarAsistencia);
+router.delete('/asistencias/eliminarAsistencia', verificarToken, eliminarAsistencia);
 
 export default router;

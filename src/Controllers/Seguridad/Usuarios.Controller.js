@@ -81,6 +81,7 @@ export const validarUsuarioxCorreo = async ( req, res ) => {
                 resp = {
                     idUsuario: data[0].idUsuario,
                     correo: data[0].Correo,
+                    idRol: data[0].FK_idRol,
                     mensaje: "Autenticación con éxito"
                 }
 
@@ -120,8 +121,10 @@ export const validarUsuarioxCorreo = async ( req, res ) => {
 
 export const insertarUsuarios = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const userData = req.body;
-        const modUsuarios = new Usuarios(userData);
+        const modUsuarios = new Usuarios(userData); 
 
         if (modUsuarios.Correo == null || modUsuarios.Contraseña == null) {
             throw new Error("Bad request: incomplete information");
@@ -134,8 +137,8 @@ export const insertarUsuarios = async ( req, res ) => {
         modUsuarios.Activo = 1;
         modUsuarios.FechaCreacion = fechaHoraActual;
         modUsuarios.FechaModificacion = fechaHoraActual;
-        modUsuarios.UsuarioCreacion = 1;
-        modUsuarios.UsuarioModificacion = 1;
+        modUsuarios.UsuarioCreacion = usuarioLog.idUsuario;
+        modUsuarios.UsuarioModificacion = usuarioLog.idUsuario;
 
         const data = await insertarUsuariosBLL(modUsuarios);
 
@@ -157,6 +160,8 @@ export const insertarUsuarios = async ( req, res ) => {
 
 export const actualizarUsuarios = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const idUsuario = req.body.idUsuario;
         const nuevoRol = req.body.idRol;
 
@@ -170,6 +175,7 @@ export const actualizarUsuarios = async ( req, res ) => {
 
         modUsuarios.FK_idRol = nuevoRol;
         modUsuarios.FechaModificacion = fechaHoraActual;
+        modUsuarios.UsuarioModificacion = usuarioLog.idUsuario;
 
         const data = await actualizarUsuariosBLL(modUsuarios);
         const response = {
@@ -190,6 +196,8 @@ export const actualizarUsuarios = async ( req, res ) => {
 
 export const cambiarContraseña = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const idUsuario = req.body.idUsuario;
         const nuevaContraseña = req.body.Contraseña;
 
@@ -205,6 +213,7 @@ export const cambiarContraseña = async ( req, res ) => {
         modUsuarios.Contraseña = hashedPassword;
 
         modUsuarios.FechaModificacion = fechaHoraActual;
+        modUsuarios.UsuarioModificacion = usuarioLog.idUsuario;
 
         const data = await actualizarUsuariosBLL(modUsuarios);
         const response = {
@@ -225,6 +234,8 @@ export const cambiarContraseña = async ( req, res ) => {
 
 export const eliminarUsuarios = async ( req, res ) => {
     try {
+        const usuarioLog = req.decoded;
+
         const idUsuario = req.body.idUsuario;
         const usuarioFiltrado = await filtrarUsuariosxIdBLL(idUsuario);
         const modUsuarios = new Usuarios(usuarioFiltrado[0]);
@@ -232,6 +243,7 @@ export const eliminarUsuarios = async ( req, res ) => {
 
         modUsuarios.Activo = 0;
         modUsuarios.FechaModificacion = fechaHoraActual;
+        modUsuarios.UsuarioModificacion = usuarioLog.idUsuario;
 
         const data = await actualizarUsuariosBLL(modUsuarios);
         const response = {

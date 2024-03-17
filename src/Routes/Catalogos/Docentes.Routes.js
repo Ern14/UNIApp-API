@@ -4,12 +4,14 @@ import { obtenerDocentes, insertarDocente, actualizarDocente, eliminarDocente } 
 
 const router = Router();
 
-router.get('/docentes/obtenerDocentes', obtenerDocentes);
+const verificarToken = require('../../Authorization/AuthMiddleware');
 
-router.post('/docentes/insertarDocente', insertarDocente);
+router.get('/docentes/obtenerDocentes', verificarToken, obtenerDocentes);
 
-router.put('/docentes/actualizarDocente', actualizarDocente);
+router.post('/docentes/insertarDocente', verificarToken, insertarDocente);
 
-router.delete('/docentes/eliminarDocente', eliminarDocente);
+router.put('/docentes/actualizarDocente', verificarToken, actualizarDocente);
+
+router.delete('/docentes/eliminarDocente', verificarToken, eliminarDocente);
 
 export default router;

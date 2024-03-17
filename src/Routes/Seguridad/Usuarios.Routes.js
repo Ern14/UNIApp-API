@@ -6,24 +6,25 @@ import {
     validarUsuarioxCorreo, 
     eliminarUsuarios, 
     actualizarUsuarios,
-    cambiarContraseña } from "../../Controllers/Seguridad/Usuarios.Controller";
+    cambiarContraseña 
+} from "../../Controllers/Seguridad/Usuarios.Controller";
 
-const verificarToken = require('../../Authorization/AuthMiddleware'); 
+const verificarToken = require('../../Authorization/AuthMiddleware');
 
 const router = Router();
 
-router.get('/obtenerUsuarios',verificarToken,obtenerUsuarios);
+router.get('/obtenerUsuarios', verificarToken, obtenerUsuarios);
 
-router.post('/insertarUsuarios',verificarToken, insertarUsuarios);
+router.post('/insertarUsuarios', verificarToken, insertarUsuarios);
 
-router.get('/filtrarUsuarios/:Correo',verificarToken, filtrarUsuariosxCorreo);
+router.get('/filtrarUsuarios/:Correo', verificarToken, filtrarUsuariosxCorreo);
 
 router.post('/validarUsuario', validarUsuarioxCorreo);
 
-router.put('/actualizarUsuarios',verificarToken, actualizarUsuarios);
+router.put('/actualizarUsuarios', verificarToken, actualizarUsuarios);
 
-router.put('/cambiarContrasena',verificarToken, cambiarContraseña);
+router.put('/cambiarContrasena', verificarToken, cambiarContraseña);
 
-router.delete('/eliminarUsuarios',verificarToken, eliminarUsuarios);
+router.delete('/eliminarUsuarios', verificarToken, eliminarUsuarios);
 
 export default router;
