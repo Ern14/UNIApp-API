@@ -66,15 +66,18 @@ export const validarUsuarioxCorreo = async ( req, res ) => {
         const Correo = req.body.Correo;
         const Contraseña = req.body.Contraseña;
         if (Correo == null || Contraseña == null) {
-            throw new Error("Bad request: incomplete information");
+            throw new Error("Información incompleta");
         };
         const data = await validarUsuarioxCorreoBLL(Correo);
 
         let resp;
         if (!data[0]){
-            const error = new Error("El correo no está registrado");
-            error.status = 400;
-            throw error;
+            const response = {
+                status: 'Exito',
+                statusCode: 404,
+                datos: 'Usuario o contraseña incorrectos'
+            }
+            res.status(response.statusCode).send(response);
         }else{
             const resultado = await bcryptjs.compare(Contraseña,data[0].Contraseña);
             if (resultado){
