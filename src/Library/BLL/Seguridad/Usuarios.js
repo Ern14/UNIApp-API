@@ -1,4 +1,11 @@
-import { obtenerUsuariosDAL, insertarUsuariosDAL, filtrarUsuariosxCorreoDAL, validarUsuarioxCorreoDAL, actualizarUsuariosDAL, filtrarUsuariosxIdDAL } from "../../DAL/Seguridad/Usuarios";
+import { 
+    obtenerUsuariosDAL, 
+    insertarUsuariosDAL, 
+    filtrarUsuariosxCorreoDAL, 
+    validarUsuarioxCorreoDAL, 
+    actualizarUsuariosDAL,
+    filtrarUsuariosxIdDAL 
+} from "../../DAL/Seguridad/Usuarios";
 
 
 export const obtenerUsuariosBLL = async () => {

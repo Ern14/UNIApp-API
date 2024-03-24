@@ -1,5 +1,8 @@
 import express from 'express';
 
+//Autenticación
+import Auth from './Authentication/Auth.Routes';
+
 //Importaciones de los catalogos
 import Asignaturas from './Catalogos/Asignaturas.Routes';
 import Asistencias from './Catalogos/Asistencias.Routes';
@@ -18,6 +21,9 @@ import UsersRoutes from './Seguridad/Usuarios.Routes';
 import RolRoutes from './Seguridad/Roles.Routes';
 
 const router = express.Router();
+
+//Ruta de autenticacion
+router.use(Auth);
 
 //Rutas de los catalogos
 router.use(Asignaturas);

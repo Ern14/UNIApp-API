@@ -1,4 +1,3 @@
-import app from "../../app";
 import bcryptjs from 'bcryptjs';
 import { 
     obtenerUsuariosBLL, 
@@ -6,7 +5,8 @@ import {
     filtrarUsuariosxCorreoBLL, 
     validarUsuarioxCorreoBLL, 
     actualizarUsuariosBLL, 
-    filtrarUsuariosxIdBLL } from '../../Library/BLL/Seguridad/Usuarios';
+    filtrarUsuariosxIdBLL 
+} from '../../Library/BLL/Seguridad/Usuarios';
 import { Usuarios } from "../../Library/Models/Seguridad/Usuarios";
 
 const jwt = require('jsonwebtoken');
@@ -49,67 +49,6 @@ export const filtrarUsuariosxCorreo = async ( req, res ) => {
             datos: data
         }
         res.status(response.statusCode).send(response);
-
-    } catch (error) {
-        const response = {
-            status: 'Error',
-            statusCode: error.statusCode || 500,
-            datos: error.message
-        }
-        res.status(response.statusCode).send(response);
-    }
-
-};
-
-export const validarUsuarioxCorreo = async ( req, res ) => {
-    try {
-        const Correo = req.body.Correo;
-        const Contraseña = req.body.Contraseña;
-        if (Correo == null || Contraseña == null) {
-            throw new Error("Información incompleta");
-        };
-        const data = await validarUsuarioxCorreoBLL(Correo);
-
-        let resp;
-        if (!data[0]){
-            const response = {
-                status: 'Exito',
-                statusCode: 404,
-                datos: 'Usuario o contraseña incorrectos'
-            }
-            res.status(response.statusCode).send(response);
-        }else{
-            const resultado = await bcryptjs.compare(Contraseña,data[0].Contraseña);
-            if (resultado){
-                resp = {
-                    idUsuario: data[0].idUsuario,
-                    correo: data[0].Correo,
-                    idRol: data[0].FK_idRol,
-                    mensaje: "Autenticación con éxito"
-                }
-
-                const token = jwt.sign({user: resp},app.get('key'),{algorithm: 'HS256'},{
-                    expiresIn: '7d'
-                });
-
-                const response = {
-                    status: 'Exito',
-                    statusCode: 200,
-                    datos: token
-                }
-                res.status(response.statusCode).send(response);
-
-            }else{
-                resp = "Usuario o contraseña incorrectos";
-
-                const response = {
-                    status: 'Exito',
-                    statusCode: 200,
-                    datos: resp
-                }
-                res.status(response.statusCode).send(response);
-            }
-        }
 
     } catch (error) {
         const response = {
