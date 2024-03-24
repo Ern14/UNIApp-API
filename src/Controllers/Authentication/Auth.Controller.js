@@ -9,7 +9,15 @@ export const validarUsuario = async ( req, res ) => {
         const Correo = req.body.Correo;
         const Contraseña = req.body.Contraseña;
         if (Correo == null || Contraseña == null) {
-            throw new Error("Información incompleta");
+            const response = {
+                status: 'Error',
+                statusCode: 400,
+                datos: {
+                    mensaje: "Información incompleta"
+                }
+            };
+            res.status(response.statusCode).send(response);
+            return;
         };
         const data = await validarUsuarioxCorreoBLL(Correo);
 
@@ -23,6 +31,7 @@ export const validarUsuario = async ( req, res ) => {
                 }
             }
             res.status(response.statusCode).send(response);
+            return;
         }else{
             const resultado = await bcryptjs.compare(Contraseña,data[0].Contraseña);
             if (resultado){
@@ -56,6 +65,7 @@ export const validarUsuario = async ( req, res ) => {
                     }
                 }
                 res.status(response.statusCode).send(response);
+                return;
             }
         }
 
@@ -66,6 +76,7 @@ export const validarUsuario = async ( req, res ) => {
             datos: error.message
         }
         res.status(response.statusCode).send(response);
+        return;
     }
 
 };
