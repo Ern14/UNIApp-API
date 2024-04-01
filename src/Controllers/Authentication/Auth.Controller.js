@@ -1,6 +1,7 @@
 import app from "../../app";
 import bcryptjs from 'bcryptjs';
 import { validarUsuarioxCorreoBLL } from '../../Library/BLL/Seguridad/Usuarios';
+import { filtrarUsuariosxIdBLL } from "../../Library/BLL/Seguridad/Usuarios";
 
 const jwt = require('jsonwebtoken');
 
@@ -19,6 +20,7 @@ export const validarUsuario = async ( req, res ) => {
             res.status(response.statusCode).send(response);
             return;
         };
+
         const data = await validarUsuarioxCorreoBLL(Correo);
 
         let resp;
@@ -52,7 +54,11 @@ export const validarUsuario = async ( req, res ) => {
                         mensaje: "Autenticación con éxito"
                     }
                 }
-                res.cookie('token',token);
+                res.cookie('token',token,{
+                    sameSite: 'none',
+                    secure: true,
+                    httpOnly: false
+                });
 
                 res.status(response.statusCode).send(response);
 
@@ -81,7 +87,7 @@ export const validarUsuario = async ( req, res ) => {
 
 };
 
-export const cerrarSesion = async ( req, res ) =>{
+export const cerrarSesion = async ( req, res ) => {
     try {
         res.cookie('token',"",{
             expires: new Date(0)
@@ -102,5 +108,24 @@ export const cerrarSesion = async ( req, res ) =>{
             datos: error.message
         }
         res.status(response.statusCode).send(response);
+    }
+}
+
+export const verificarToken = async (req,res) => {
+    const { token } = req.cookies;
+
+    if (!token) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }else {
+        jwt.verify(token, app.get('key'), async (err, decoded) => {
+            if (err) {
+                return res.status(403).json({ message: 'Invalid token' });
+            }
+            const datos = await filtrarUsuariosxIdBLL(decoded.user.idUsuario);
+            return res.json({
+                idUsuario: datos[0].idUsuario,
+                idRol: datos[0].FK_idRol
+            });
+        });
     }
 }

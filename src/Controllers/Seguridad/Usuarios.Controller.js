@@ -69,7 +69,27 @@ export const insertarUsuarios = async ( req, res ) => {
         const modUsuarios = new Usuarios(userData); 
 
         if (modUsuarios.Correo == null || modUsuarios.Contraseña == null) {
-            throw new Error("Bad request: incomplete information");
+            const response = {
+                status: 'Error',
+                statusCode: 400,
+                datos: {
+                    mensaje: "Información incompleta"
+                }
+            };
+            res.status(response.statusCode).send(response);
+            return;
+        };
+
+        if (modUsuarios.Contraseña.length < 6 || !/[A-Z]/.test(modUsuarios.Contraseña) || !/[\W_]/.test(modUsuarios.Contraseña)) {
+            const response = {
+                status: 'Error',
+                statusCode: 400,
+                datos: {
+                    mensaje: "La contraseña debe tener almenos 6 carateres, una mayúscula y un caracter especial."
+                }
+            };
+            res.status(response.statusCode).send(response);
+            return;
         };
 
         const hashedPassword = await encryptPassword(modUsuarios.Contraseña);

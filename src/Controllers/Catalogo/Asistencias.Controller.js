@@ -30,7 +30,6 @@ export const insertarAsistencia = async ( req, res ) => {
         const fechaActual = `${fechaHoraActual.getFullYear()}-${(fechaHoraActual.getMonth() + 1).toString().padStart(2, '0')}-${fechaHoraActual.getDate().toString().padStart(2, '0')}`;
         const userData = req.body;
         const modAsistencia = new Asistencias(userData);
-        console.log(modAsistencia)
         if (modAsistencia.idDocente == null || modAsistencia.Asistencia == null) {
             throw new Error("Bad request: incomplete information");
         };
