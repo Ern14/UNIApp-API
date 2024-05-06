@@ -197,8 +197,8 @@ export const cambiarContraseña = async ( req, res ) => {
 export const eliminarUsuarios = async ( req, res ) => {
     try {
         const usuarioLog = req.decoded;
-
-        const idUsuario = req.body.idUsuario;
+        
+        const idUsuario = req.body.IdUsuario;
         const usuarioFiltrado = await filtrarUsuariosxIdBLL(idUsuario);
         const modUsuarios = new Usuarios(usuarioFiltrado[0]);
         const fechaHoraActual = new Date();

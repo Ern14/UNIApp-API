@@ -15,7 +15,11 @@ app.set('port', config.port);
 app.set('key',secretKey.key)
 
 app.use(cors({
-    credentials: true
+    credentials: true,
+    origin:  [
+        'https://89bj2f63-3000.use2.devtunnels.ms',
+        'http://localhost:3000'
+    ]
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
