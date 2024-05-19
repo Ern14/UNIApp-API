@@ -67,8 +67,8 @@ export const insertarUsuarios = async ( req, res ) => {
 
         const userData = req.body;
         const modUsuarios = new Usuarios(userData); 
-
-        if (modUsuarios.Correo == null || modUsuarios.Contraseña == null) {
+        console.log(modUsuarios)
+        if (modUsuarios.Correo == null || modUsuarios.Contraseña == null || modUsuarios.FK_idRol == null ) {
             const response = {
                 status: 'Error',
                 statusCode: 400,
