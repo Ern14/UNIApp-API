@@ -2,6 +2,7 @@ import { Router } from "express";
 import { 
     obtenerUsuarios, 
     insertarUsuarios, 
+    filtrarUsuariosxId,
     filtrarUsuariosxCorreo, 
     eliminarUsuarios, 
     actualizarUsuarios,
@@ -15,6 +16,8 @@ const router = Router();
 router.get('/obtenerUsuarios', verificarToken, obtenerUsuarios);
 
 router.post('/insertarUsuarios', verificarToken, insertarUsuarios);
+
+router.get('/filtrarUsuarios/:idUsuario', verificarToken, filtrarUsuariosxId);
 
 router.get('/filtrarUsuarios/:Correo', verificarToken, filtrarUsuariosxCorreo);
 

@@ -39,6 +39,28 @@ export const obtenerUsuarios = async ( req, res ) => {
 
 };
 
+export const filtrarUsuariosxId = async ( req, res ) => {
+    try {
+        const IdUsuario = req.params.idUsuario;
+        const data = await filtrarUsuariosxIdBLL(IdUsuario);
+        const response = {
+            status: 'Exito',
+            statusCode: 200,
+            datos: data
+        }
+        res.status(response.statusCode).send(response);
+
+    } catch (error) {
+        const response = {
+            status: 'Error',
+            statusCode: error.statusCode || 500,
+            datos: error.message
+        }
+        res.status(response.statusCode).send(response);
+    }
+
+};
+
 export const filtrarUsuariosxCorreo = async ( req, res ) => {
     try {
         const Correo = req.params.Correo;
@@ -66,8 +88,7 @@ export const insertarUsuarios = async ( req, res ) => {
         const usuarioLog = req.decoded;
 
         const userData = req.body;
-        const modUsuarios = new Usuarios(userData); 
-        console.log(modUsuarios)
+        const modUsuarios = new Usuarios(userData);
         if (modUsuarios.Correo == null || modUsuarios.Contraseña == null || modUsuarios.FK_idRol == null ) {
             const response = {
                 status: 'Error',
