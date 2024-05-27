@@ -2,8 +2,8 @@ import bcryptjs from 'bcryptjs';
 import { 
     obtenerUsuariosBLL, 
     insertarUsuariosBLL, 
-    filtrarUsuariosxCorreoBLL, 
-    validarUsuarioxCorreoBLL, 
+    filtrarUsuariosxCorreoBLL,
+    filtrarUsuariosxBusquedaBLL,
     actualizarUsuariosBLL, 
     filtrarUsuariosxIdBLL 
 } from '../../Library/BLL/Seguridad/Usuarios';
@@ -21,6 +21,29 @@ const encryptPassword = async (password) => {
 export const obtenerUsuarios = async ( req, res ) => {
     try {
         const data = await obtenerUsuariosBLL();
+        const response = {
+            status: 'Exito',
+            statusCode: 200,
+            datos: data
+        }
+        res.status(response.statusCode).send(response);
+
+    } catch (error) {
+        const response = {
+            status: 'Error',
+            statusCode: error.statusCode || 500,
+            datos: error.message
+        }
+        res.status(response.statusCode).send(response);
+    }
+
+};
+
+export const filtrarUsuariosxBusqueda = async ( req, res ) => {
+    try {
+        const busqueda = req.body.Busqueda;
+        const data = await filtrarUsuariosxBusquedaBLL(busqueda);
+
         const response = {
             status: 'Exito',
             statusCode: 200,
@@ -101,6 +124,18 @@ export const insertarUsuarios = async ( req, res ) => {
             return;
         };
 
+        if (modUsuarios.Correo.length < 5 ) {
+            const response = {
+                status: 'Error',
+                statusCode: 400,
+                datos: {
+                    mensaje: "El usuario debe tener almenos 5 caracteres"
+                }
+            };
+            res.status(response.statusCode).send(response);
+            return;
+        };
+
         if (modUsuarios.Contraseña.length < 6 || !/[A-Z]/.test(modUsuarios.Contraseña) || !/[\W_]/.test(modUsuarios.Contraseña)) {
             const response = {
                 status: 'Error',
@@ -123,19 +158,23 @@ export const insertarUsuarios = async ( req, res ) => {
         modUsuarios.UsuarioCreacion = usuarioLog.idUsuario;
         modUsuarios.UsuarioModificacion = usuarioLog.idUsuario;
 
-        const data = await insertarUsuariosBLL(modUsuarios);
+        await insertarUsuariosBLL(modUsuarios);
 
         const response = {
             status: 'Exito',
             statusCode: 200,
-            datos: data
+            datos: {
+                mensaje: "Usuario creado con éxito"
+            }
         }
         res.status(response.statusCode).send(response);
     } catch (error) {
         const response = {
             status: 'Error',
             statusCode: error.statusCode || 500,
-            datos: error.message
+            datos: {
+                mensaje: error.message
+            }
         }
         res.status(response.statusCode).send(response);
     }   
@@ -145,8 +184,9 @@ export const actualizarUsuarios = async ( req, res ) => {
     try {
         const usuarioLog = req.decoded;
 
-        const idUsuario = req.body.idUsuario;
-        const nuevoRol = req.body.idRol;
+        const idUsuario = req.body.IdUsuario;
+        const nuevoCorreo = req.body.Correo;
+        const nuevoRol = req.body.FK_idRol;
 
         if (nuevoRol == null) {
             throw new Error("Bad request: incomplete information");
@@ -156,22 +196,27 @@ export const actualizarUsuarios = async ( req, res ) => {
         const modUsuarios = new Usuarios(usuarioFiltrado[0]);
         const fechaHoraActual = new Date();
 
+        modUsuarios.Correo = nuevoCorreo;
         modUsuarios.FK_idRol = nuevoRol;
         modUsuarios.FechaModificacion = fechaHoraActual;
         modUsuarios.UsuarioModificacion = usuarioLog.idUsuario;
 
-        const data = await actualizarUsuariosBLL(modUsuarios);
+        await actualizarUsuariosBLL(modUsuarios);
         const response = {
             status: 'Exito',
             statusCode: 200,
-            datos: data
+            datos: {
+                mensaje: "Usuario actualizado con éxito"
+            }
         }
         res.status(response.statusCode).send(response);
     } catch (error) {
         const response = {
             status: 'Error',
             statusCode: error.statusCode || 500,
-            datos: error.message
+            datos: {
+                mensaje: error.message
+            }
         }
         res.status(response.statusCode).send(response);
     }   
@@ -198,18 +243,22 @@ export const cambiarContraseña = async ( req, res ) => {
         modUsuarios.FechaModificacion = fechaHoraActual;
         modUsuarios.UsuarioModificacion = usuarioLog.idUsuario;
 
-        const data = await actualizarUsuariosBLL(modUsuarios);
+        await actualizarUsuariosBLL(modUsuarios);
         const response = {
             status: 'Exito',
             statusCode: 200,
-            datos: data
+            datos: {
+                mensaje: "Contraseña cambiada con éxito"
+            }
         }
         res.status(response.statusCode).send(response);
     } catch (error) {
         const response = {
             status: 'Error',
             statusCode: error.statusCode || 500,
-            datos: error.message
+            datos: {
+                mensaje: error.message
+            }
         }
         res.status(response.statusCode).send(response);
     }   
@@ -228,18 +277,22 @@ export const eliminarUsuarios = async ( req, res ) => {
         modUsuarios.FechaModificacion = fechaHoraActual;
         modUsuarios.UsuarioModificacion = usuarioLog.idUsuario;
 
-        const data = await actualizarUsuariosBLL(modUsuarios);
+        await actualizarUsuariosBLL(modUsuarios);
         const response = {
             status: 'Exito',
             statusCode: 200,
-            datos: data
+            datos: {
+                mensaje: "Usuario eliminado con éxito"
+            }
         }
         res.status(response.statusCode).send(response);
     } catch (error) {
         const response = {
             status: 'Error',
             statusCode: error.statusCode || 500,
-            datos: error.message
+            datos: {
+                mensaje: error.message
+            }
         }
         res.status(response.statusCode).send(response);
     }   

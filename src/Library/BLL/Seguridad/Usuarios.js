@@ -1,10 +1,11 @@
 import { 
     obtenerUsuariosDAL, 
     insertarUsuariosDAL, 
-    filtrarUsuariosxCorreoDAL, 
+    filtrarUsuariosxCorreoDAL,
+    filtrarUsuariosxBusquedaDAL,
     validarUsuarioxCorreoDAL, 
     actualizarUsuariosDAL,
-    filtrarUsuariosxIdDAL 
+    filtrarUsuariosxIdDAL
 } from "../../DAL/Seguridad/Usuarios";
 
 
@@ -20,6 +21,15 @@ export const obtenerUsuariosBLL = async () => {
 export const filtrarUsuariosxCorreoBLL = async (Correo) => {
     try {
         const usuarios = await filtrarUsuariosxCorreoDAL(Correo);
+        return usuarios;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const filtrarUsuariosxBusquedaBLL = async (busqueda) => {
+    try {
+        const usuarios = await filtrarUsuariosxBusquedaDAL(busqueda);
         return usuarios;
     } catch (error) {
         throw error;

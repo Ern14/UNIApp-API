@@ -37,6 +37,19 @@ export const filtrarUsuariosxIdDAL = async (idUsuario) => {
 
 };
 
+export const filtrarUsuariosxBusquedaDAL = async (busqueda) => {
+    try {
+        const pool = await getConnection();
+        const result = await pool.request()
+        .input('Busqueda', sql.VarChar, busqueda)
+        .execute('[Seguridad].[FiltrarUsuariosxBusqueda]');
+        return result.recordset;
+    } catch (error) {
+        throw error;
+    }
+
+};
+
 export const validarUsuarioxCorreoDAL = async (Correo) => {
     try {
         const pool = await getConnection();
@@ -78,7 +91,6 @@ export const actualizarUsuariosDAL = async (modUsuarios) => {
         .input('idUsuario' ,sql.Int, modUsuarios.idUsuario)
         .input('FK_idRol' ,sql.Int, modUsuarios.FK_idRol) 
         .input('Correo', sql.VarChar, modUsuarios.Correo)
-        .input('Contraseña' ,sql.VarChar, modUsuarios.Contraseña)
         .input('Activo' ,sql.Bit, modUsuarios.Activo)
         .input('FechaCreacion' ,sql.DateTime, modUsuarios.FechaCreacion)
         .input('UsuarioCreacion' ,sql.Int, modUsuarios.UsuarioCreacion)

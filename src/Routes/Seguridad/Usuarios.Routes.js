@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { 
     obtenerUsuarios, 
-    insertarUsuarios, 
+    insertarUsuarios,
+    filtrarUsuariosxBusqueda, 
     filtrarUsuariosxId,
     filtrarUsuariosxCorreo, 
     eliminarUsuarios, 
@@ -14,6 +15,8 @@ const verificarToken = require('../../Authorization/AuthMiddleware');
 const router = Router();
 
 router.get('/obtenerUsuarios', verificarToken, obtenerUsuarios);
+
+router.post('/filtrarUsuariosxBusqueda', verificarToken, filtrarUsuariosxBusqueda);
 
 router.post('/insertarUsuarios', verificarToken, insertarUsuarios);
 
