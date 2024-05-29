@@ -1,4 +1,4 @@
-import { obtenerRolesDAL, insertarRolesDAL, actualizarRolesDAL, obtenerRolxIdDAL } from "../../DAL/Seguridad/Roles";
+import { obtenerRolesDAL, insertarRolesDAL, actualizarRolesDAL, obtenerRolxIdDAL, filtrarRolesxBusquedaDAL } from "../../DAL/Seguridad/Roles";
 
 export const obtenerRolesBLL = async () => {
     try {
@@ -13,6 +13,15 @@ export const obtenerRolxIdBLL = async (idRol) => {
     try {
         const rol = await obtenerRolxIdDAL(idRol);
         return rol;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const filtrarRolesxBusquedaBLL = async (busqueda) => {
+    try {
+        const roles = await filtrarRolesxBusquedaDAL(busqueda);
+        return roles;
     } catch (error) {
         throw error;
     }

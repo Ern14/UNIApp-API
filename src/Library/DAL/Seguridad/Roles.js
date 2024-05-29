@@ -24,6 +24,19 @@ export const obtenerRolxIdDAL = async (idRol) => {
 
 };
 
+export const filtrarRolesxBusquedaDAL = async (busqueda) => {
+    try {
+        const pool = await getConnection();
+        const result = await pool.request()
+        .input('Busqueda', sql.VarChar, busqueda)
+        .execute('[Seguridad].[FiltrarRolesxBusqueda]');
+        return result.recordset;
+    } catch (error) {
+        throw error;
+    }
+
+};
+
 export const insertarRolesDAL = async (modRoles) => {
     try {
         const pool = await getConnection();

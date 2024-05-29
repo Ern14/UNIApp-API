@@ -32,7 +32,9 @@ export const obtenerUsuarios = async ( req, res ) => {
         const response = {
             status: 'Error',
             statusCode: error.statusCode || 500,
-            datos: error.message
+            datos: {
+                mensaje: error.message
+            }
         }
         res.status(response.statusCode).send(response);
     }
@@ -55,7 +57,9 @@ export const filtrarUsuariosxBusqueda = async ( req, res ) => {
         const response = {
             status: 'Error',
             statusCode: error.statusCode || 500,
-            datos: error.message
+            datos: {
+                mensaje: error.message
+            }
         }
         res.status(response.statusCode).send(response);
     }
@@ -77,7 +81,9 @@ export const filtrarUsuariosxId = async ( req, res ) => {
         const response = {
             status: 'Error',
             statusCode: error.statusCode || 500,
-            datos: error.message
+            datos: {
+                mensaje: error.message
+            }
         }
         res.status(response.statusCode).send(response);
     }
@@ -99,7 +105,9 @@ export const filtrarUsuariosxCorreo = async ( req, res ) => {
         const response = {
             status: 'Error',
             statusCode: error.statusCode || 500,
-            datos: error.message
+            datos: {
+                mensaje: error.message
+            }
         }
         res.status(response.statusCode).send(response);
     }
@@ -189,7 +197,7 @@ export const actualizarUsuarios = async ( req, res ) => {
         const nuevoRol = req.body.FK_idRol;
 
         if (nuevoRol == null) {
-            throw new Error("Bad request: incomplete information");
+            throw new Error("Información incompleta");
         };
 
         const usuarioFiltrado = await filtrarUsuariosxIdBLL(idUsuario);
