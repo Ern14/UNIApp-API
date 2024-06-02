@@ -1,4 +1,4 @@
-import { obtenerAsignaturasBLL, insertarAsignaturaBLL, actualizarAsignaturaBLL, obtenerAsignaturaxIdBLL } from '../../Library/BLL/Catalogo/Asignaturas';
+import { obtenerAsignaturasBLL, insertarAsignaturaBLL, actualizarAsignaturaBLL, obtenerAsignaturaxIdBLL, filtrarAsignaturasxBusquedaBLL } from '../../Library/BLL/Catalogo/Asignaturas';
 import { Asignaturas } from '../../Library/Models/Catalogo/Asignaturas';
 
 export const obtenerAsignaturas = async ( req, res ) => {
@@ -15,7 +15,58 @@ export const obtenerAsignaturas = async ( req, res ) => {
         const response = {
             status: 'Error',
             statusCode: error.statusCode || 500,
-            datos: error.message
+            datos: {
+                mensaje: error.message
+            }
+        }
+        res.status(response.statusCode).send(response);
+    }
+
+};
+
+export const filtrarAsignaturaxId = async ( req, res ) => {
+    try {
+        const idAsignatura = req.params.idAsignatura;
+        const data = await obtenerAsignaturaxIdBLL(idAsignatura);
+        const response = {
+            status: 'Exito',
+            statusCode: 200,
+            datos: data
+        }
+        res.status(response.statusCode).send(response);
+
+    } catch (error) {
+        const response = {
+            status: 'Error',
+            statusCode: error.statusCode || 500,
+            datos: {
+                mensaje: error.message
+            }
+        }
+        res.status(response.statusCode).send(response);
+    }
+
+};
+
+export const filtrarAsignaturasxBusqueda = async ( req, res ) => {
+    try {
+        const busqueda = req.body.Busqueda;
+        const data = await filtrarAsignaturasxBusquedaBLL(busqueda);
+
+        const response = {
+            status: 'Exito',
+            statusCode: 200,
+            datos: data
+        }
+        res.status(response.statusCode).send(response);
+
+    } catch (error) {
+        const response = {
+            status: 'Error',
+            statusCode: error.statusCode || 500,
+            datos: {
+                mensaje: error.message
+            }
         }
         res.status(response.statusCode).send(response);
     }
@@ -29,28 +80,31 @@ export const insertarAsignatura = async ( req, res ) => {
         const fechaHoraActual = new Date();
         const userData = req.body;
         const modAsignatura = new Asignaturas(userData);
-        if (modAsignatura.Nombre == null) {
-            throw new Error("Bad request: incomplete information");
+        if (modAsignatura.Nombre == null || modAsignatura.idPeriodo == null) {
+            throw new Error("Información incompleta");
         };
-        
         modAsignatura.Activo = 1;
         modAsignatura.FechaCreacion = fechaHoraActual;
         modAsignatura.FechaModificacion = fechaHoraActual;
         modAsignatura.UsuarioCreacion = usuarioLog.idUsuario;
         modAsignatura.UsuarioModificacion = usuarioLog.idUsuario;
 
-        const data = await insertarAsignaturaBLL(modAsignatura);
+        await insertarAsignaturaBLL(modAsignatura);
         const response = {
             status: 'Exito',
             statusCode: 200,
-            datos: data
+            datos: {
+                mensaje: "Registro insertado con éxito"
+            }
         }
         res.status(response.statusCode).send(response);
     } catch (error) {
         const response = {
             status: 'Error',
             statusCode: error.statusCode || 500,
-            datos: error.message
+            datos: {
+                mensaje: error.message
+            }
         }
         res.status(response.statusCode).send(response);
     }
@@ -62,8 +116,8 @@ export const actualizarAsignatura = async ( req, res ) => {
         const usuarioLog = req.decoded;
 
         const fechaHoraActual = new Date();
-        const idAsignatura = req.body.idAsignatura;
-        const idPeriodo = req.body.idPeriodo;
+        const idAsignatura = req.body.IdAsignatura;
+        const idPeriodo = req.body.IdPeriodo;
         const Nombre = req.body.Nombre;
         const userData = await obtenerAsignaturaxIdBLL(idAsignatura);
         if (userData.length > 0){
@@ -75,19 +129,23 @@ export const actualizarAsignatura = async ( req, res ) => {
             modAsignatura.Activo = 1;
             modAsignatura.FechaModificacion = fechaHoraActual;
             modAsignatura.UsuarioModificacion = usuarioLog.idUsuario;
-            const data = await actualizarAsignaturaBLL(modAsignatura);
+            await actualizarAsignaturaBLL(modAsignatura);
 
             const response = {
                 status: 'Exito',
                 statusCode: 200,
-                datos: data
+                datos: {
+                    mensaje: "Registro actualizado con éxito"
+                }
             }
             res.status(response.statusCode).send(response);
         }else{
             const response = {
                 status: 'Exito',
                 statusCode: 204,
-                datos: req.body
+                datos: {
+                    mensaje: "Registro no encontrado"
+                }
             }
             res.status(response.statusCode).send(response);
         }
@@ -96,7 +154,9 @@ export const actualizarAsignatura = async ( req, res ) => {
         const response = {
             status: 'Error',
             statusCode: error.statusCode || 500,
-            datos: error.message
+            datos: {
+                mensaje: error.message
+            }
         }
         res.status(response.statusCode).send(response);
     }
@@ -108,7 +168,7 @@ export const eliminarAsignatura = async ( req, res ) => {
         const usuarioLog = req.decoded;
 
         const fechaHoraActual = new Date();
-        const idAsignatura = req.body.idAsignatura;
+        const idAsignatura = req.body.IdAsignatura;
         const userData = await obtenerAsignaturaxIdBLL(idAsignatura);
         if (userData.length > 0){
             const modAsignatura = new Asignaturas(userData[0]);
@@ -117,19 +177,23 @@ export const eliminarAsignatura = async ( req, res ) => {
             modAsignatura.FechaModificacion = fechaHoraActual;
             modAsignatura.UsuarioModificacion = usuarioLog.idUsuario;
     
-            const data = await actualizarAsignaturaBLL(modAsignatura);
+            await actualizarAsignaturaBLL(modAsignatura);
 
             const response = {
                 status: 'Exito',
                 statusCode: 200,
-                datos: data
+                datos: {
+                    mensaje: "Registro eliminado con éxito"
+                }
             }
             res.status(response.statusCode).send(response);
         }else{
             const response = {
                 status: 'Exito',
                 statusCode: 204,
-                datos: req.body
+                datos: {
+                    mensaje: "Registro no encontrado"
+                }
             }
             res.status(response.statusCode).send(response);
         }
@@ -137,7 +201,9 @@ export const eliminarAsignatura = async ( req, res ) => {
         const response = {
             status: 'Error',
             statusCode: error.statusCode || 500,
-            datos: error.message
+            datos: {
+                mensaje: error.message
+            }
         }
         res.status(response.statusCode).send(response);
     }

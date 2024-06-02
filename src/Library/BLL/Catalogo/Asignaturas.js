@@ -1,4 +1,4 @@
-import { obtenerAsignaturasDAL, insertarAsignaturaDAL, actualizarAsignaturaDAL, obtenerAsignaturaxIdDAL } from "../../DAL/Catalogo/Asignaturas";
+import { obtenerAsignaturasDAL, insertarAsignaturaDAL, actualizarAsignaturaDAL, obtenerAsignaturaxIdDAL, filtrarAsignaturasxBusquedaDAL } from "../../DAL/Catalogo/Asignaturas";
 
 export const obtenerAsignaturasBLL = async () => {
     try {
@@ -13,6 +13,15 @@ export const obtenerAsignaturaxIdBLL = async (idAsignatura) => {
     try {
         const asignatura = await obtenerAsignaturaxIdDAL(idAsignatura);
         return asignatura;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const filtrarAsignaturasxBusquedaBLL = async (busqueda) => {
+    try {
+        const roles = await filtrarAsignaturasxBusquedaDAL(busqueda);
+        return roles;
     } catch (error) {
         throw error;
     }
