@@ -1,4 +1,4 @@
-import { obtenerGruposDAL, insertarGrupoDAL, actualizarGrupoDAL, obtenerGrupoxIdDAL } from "../../DAL/Catalogo/Grupos";
+import { obtenerGruposDAL, insertarGrupoDAL, actualizarGrupoDAL, obtenerGrupoxIdDAL, filtrarGruposxBusquedaDAL } from "../../DAL/Catalogo/Grupos";
 
 export const obtenerGruposBLL = async () => {
     try {
@@ -13,6 +13,15 @@ export const obtenerGrupoxIdBLL = async (idGrupo) => {
     try {
         const grupo = await obtenerGrupoxIdDAL(idGrupo);
         return grupo;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const filtrarGruposxBusquedaBLL = async (busqueda) => {
+    try {
+        const grupos = await filtrarGruposxBusquedaDAL(busqueda);
+        return grupos;
     } catch (error) {
         throw error;
     }

@@ -24,6 +24,19 @@ export const obtenerGrupoxIdDAL = async (idGrupo) => {
 
 };
 
+export const filtrarGruposxBusquedaDAL = async (busqueda) => {
+    try {
+        const pool = await getConnection();
+        const result = await pool.request()
+        .input('Busqueda', sql.VarChar, busqueda)
+        .execute('[Catalogo].[FiltrarGruposxBusqueda]');
+        return result.recordset;
+    } catch (error) {
+        throw error;
+    }
+
+};
+
 export const insertarGrupoDAL = async (modGrupo) => {
     try {
         const pool = await getConnection();

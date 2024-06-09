@@ -24,6 +24,19 @@ export const obtenerPeriodoxIdDAL = async (idPeriodo) => {
 
 };
 
+export const filtrarPeriodosxBusquedaDAL = async (busqueda) => {
+    try {
+        const pool = await getConnection();
+        const result = await pool.request()
+        .input('Busqueda', sql.VarChar, busqueda)
+        .execute('[Catalogo].[FiltrarPeriodosxBusqueda]');
+        return result.recordset;
+    } catch (error) {
+        throw error;
+    }
+
+};
+
 export const insertarPeriodoDAL = async (modPeriodo) => {
     try {
         const pool = await getConnection();
