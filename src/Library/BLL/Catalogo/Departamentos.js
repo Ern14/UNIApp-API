@@ -1,4 +1,4 @@
-import { obtenerDepartamentosDAL, insertarDepartamentoDAL, actualizarDepartamentoDAL, obtenerDepartamentoxIdDAL } from "../../DAL/Catalogo/Departamentos";
+import { obtenerDepartamentosDAL, insertarDepartamentoDAL, actualizarDepartamentoDAL, obtenerDepartamentoxIdDAL, filtrarDepartamentosxBusquedaDAL } from "../../DAL/Catalogo/Departamentos";
 
 export const obtenerDepartamentosBLL = async () => {
     try {
@@ -13,6 +13,15 @@ export const obtenerDepartamentoxIdBLL = async (idDepartamento) => {
     try {
         const departamento = await obtenerDepartamentoxIdDAL(idDepartamento);
         return departamento;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const filtrarDepartamentosxBusquedaBLL = async (busqueda) => {
+    try {
+        const departamentos = await filtrarDepartamentosxBusquedaDAL(busqueda);
+        return departamentos;
     } catch (error) {
         throw error;
     }
