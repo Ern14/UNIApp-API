@@ -1,12 +1,16 @@
 import { Router } from "express";
 
-import { obtenerDocentes, insertarDocente, actualizarDocente, eliminarDocente } from "../../Controllers/Catalogo/Docentes.Controller";
+import { obtenerDocentes, insertarDocente, actualizarDocente, eliminarDocente, filtrarDocentesxBusqueda, filtrarDocentexId } from "../../Controllers/Catalogo/Docentes.Controller";
 
 const router = Router();
 
 const verificarToken = require('../../Authorization/AuthMiddleware');
 
 router.get('/docentes/obtenerDocentes', verificarToken, obtenerDocentes);
+
+router.post('/docentes/filtrarDocentexBusqueda', verificarToken, filtrarDocentesxBusqueda);
+
+router.get('/docentes/filtrarDocentexId/:idDocente', verificarToken, filtrarDocentexId);
 
 router.post('/docentes/insertarDocente', verificarToken, insertarDocente);
 

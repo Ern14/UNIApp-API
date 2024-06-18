@@ -24,6 +24,19 @@ export const obtenerDocentexIdDAL = async (idDocente) => {
 
 };
 
+export const filtrarDocentesxBusquedaDAL = async (busqueda) => {
+    try {
+        const pool = await getConnection();
+        const result = await pool.request()
+        .input('Busqueda', sql.VarChar, busqueda)
+        .execute('[Catalogo].[FiltrarDocentesxBusqueda]');
+        return result.recordset;
+    } catch (error) {
+        throw error;
+    }
+
+};
+
 export const insertarDocenteDAL = async (modDocente) => {
     try {
         const pool = await getConnection();
