@@ -5,6 +5,7 @@ import Auth from './Authentication/Auth.Routes';
 
 //Importaciones de los catalogos
 import Asignaturas from './Catalogos/Asignaturas.Routes';
+import Carreras from './Catalogos/Carreras.Routes';
 import Asistencias from './Catalogos/Asistencias.Routes';
 import Departamentos from './Catalogos/Departamentos.Routes';
 import Docentes from './Catalogos/Docentes.Routes';
@@ -27,6 +28,7 @@ router.use(Auth);
 
 //Rutas de los catalogos
 router.use(Asignaturas);
+router.use(Carreras);
 router.use(Asistencias);
 router.use(Departamentos);
 router.use(Docentes);
