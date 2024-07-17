@@ -80,7 +80,7 @@ export const insertarAsignatura = async ( req, res ) => {
         const fechaHoraActual = new Date();
         const userData = req.body;
         const modAsignatura = new Asignaturas(userData);
-        if (modAsignatura.Nombre == null || modAsignatura.idPeriodo == null) {
+        if (modAsignatura.Nombre == null) {
             throw new Error("Información incompleta");
         };
         modAsignatura.Activo = 1;
@@ -117,15 +117,15 @@ export const actualizarAsignatura = async ( req, res ) => {
 
         const fechaHoraActual = new Date();
         const idAsignatura = req.body.IdAsignatura;
-        const idPeriodo = req.body.IdPeriodo;
         const Nombre = req.body.Nombre;
+        const Descripcion = req.body.Descripcion;
         const userData = await obtenerAsignaturaxIdBLL(idAsignatura);
         if (userData.length > 0){
             const modAsignatura = new Asignaturas(userData[0]);
 
             modAsignatura.idAsignatura = idAsignatura;
-            modAsignatura.idPeriodo = idPeriodo;
             modAsignatura.Nombre = Nombre;
+            modAsignatura.Descripcion = Descripcion;
             modAsignatura.Activo = 1;
             modAsignatura.FechaModificacion = fechaHoraActual;
             modAsignatura.UsuarioModificacion = usuarioLog.idUsuario;

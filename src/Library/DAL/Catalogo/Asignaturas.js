@@ -41,8 +41,8 @@ export const insertarAsignaturaDAL = async (modAsignatura) => {
     try {
         const pool = await getConnection();
         const result = await pool.request()
-        .input('IdPeriodo' ,sql.Int, modAsignatura.idPeriodo)
         .input('Nombre' ,sql.VarChar, modAsignatura.Nombre) 
+        .input('Descripcion' ,sql.VarChar, modAsignatura.Descripcion)
         .input('Activo' ,sql.Bit, modAsignatura.Activo)
         .input('FechaCreacion' ,sql.DateTime, modAsignatura.FechaCreacion)
         .input('UsuarioCreacion' ,sql.Int, modAsignatura.UsuarioCreacion)
@@ -61,8 +61,8 @@ export const actualizarAsignaturaDAL = async (modAsignatura) => {
         const pool = await getConnection();
         const result = await pool.request()
         .input('IdAsignatura' ,sql.Int, modAsignatura.idAsignatura) 
-        .input('IdPeriodo' ,sql.Int, modAsignatura.idPeriodo)
         .input('Nombre' ,sql.VarChar, modAsignatura.Nombre)
+        .input('Descripcion' ,sql.VarChar, modAsignatura.Descripcion)
         .input('Activo', sql.Bit, modAsignatura.Activo)
         .input('FechaCreacion' ,sql.DateTime, modAsignatura.FechaCreacion)
         .input('FechaModificacion' ,sql.DateTime, modAsignatura.FechaModificacion)
