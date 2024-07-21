@@ -41,6 +41,8 @@ export const insertarGrupoDAL = async (modGrupo) => {
     try {
         const pool = await getConnection();
         const result = await pool.request()
+        .input('IdPeriodo' ,sql.Int, modGrupo.idPeriodo)
+        .input('IdCarrera' ,sql.Int, modGrupo.idCarrera)
         .input('Nombre' ,sql.VarChar, modGrupo.Nombre) 
         .input('Activo' ,sql.Bit, modGrupo.Activo)
         .input('FechaCreacion' ,sql.DateTime, modGrupo.FechaCreacion)
@@ -59,7 +61,9 @@ export const actualizarGrupoDAL = async (modGrupo) => {
     try {
         const pool = await getConnection();
         const result = await pool.request()
-        .input('idGrupo' ,sql.Int, modGrupo.idGrupo) 
+        .input('idGrupo' ,sql.Int, modGrupo.idGrupo)
+        .input('IdPeriodo' ,sql.Int, modGrupo.idPeriodo)
+        .input('IdCarrera' ,sql.Int, modGrupo.idCarrera) 
         .input('Nombre' ,sql.VarChar, modGrupo.Nombre) 
         .input('Activo', sql.Bit, modGrupo.Activo)
         .input('FechaCreacion' ,sql.DateTime, modGrupo.FechaCreacion)

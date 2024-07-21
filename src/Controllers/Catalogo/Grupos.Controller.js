@@ -80,7 +80,7 @@ export const insertarGrupo = async ( req, res ) => {
         const fechaHoraActual = new Date();
         const userData = req.body;
         const modGrupo = new Grupos(userData);
-        if (modGrupo.Nombre == null) {
+        if (modGrupo.idPeriodo == null || modGrupo.idCarrera == null || modGrupo.Nombre == null) {
             throw new Error("Información incompleta");
         };
         
@@ -118,6 +118,8 @@ export const actualizarGrupo = async ( req, res ) => {
 
         const fechaHoraActual = new Date();
         const idGrupo = req.body.IdGrupo;
+        const idPeriodo = req.body.IdPeriodo;
+        const idCarrera = req.body.IdCarrera;
         const Nombre = req.body.Nombre;
         const userData = await obtenerGrupoxIdBLL(idGrupo);
 
@@ -125,6 +127,8 @@ export const actualizarGrupo = async ( req, res ) => {
             const modGrupo = new Grupos(userData[0]);
 
             modGrupo.idGrupo = idGrupo;
+            modGrupo.idPeriodo = idPeriodo;
+            modGrupo.idCarrera = idCarrera;
             modGrupo.Nombre = Nombre;
             modGrupo.Activo = 1;
             modGrupo.FechaModificacion = fechaHoraActual;
