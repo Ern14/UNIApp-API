@@ -13,6 +13,7 @@ import Grupos from './Catalogos/Grupos.Routes';
 import Periodos from './Catalogos/Periodos.Routes';
 
 //Importaciones del esquema Operaciones
+import CarreraAsignatura from './Operaciones/CarreraAsignatura.Routes';
 import DocenteAsignatura from './Operaciones/DocenteAsignatura.Routes';
 import DocenteDepartamento from './Operaciones/DocenteDepartamento.Routes';
 import DocenteGrupo from './Operaciones/DocenteGrupo.Routes';
@@ -36,6 +37,7 @@ router.use(Grupos);
 router.use(Periodos);
 
 //Rutas del esquema Operaciones
+router.use(CarreraAsignatura);
 router.use(DocenteAsignatura);
 router.use(DocenteDepartamento);
 router.use(DocenteGrupo);
