@@ -1,9 +1,11 @@
 import { getConnection, sql } from "../../Database/Connection";
 
-export const obtenerDocenteDepartamentoDAL = async () => {
+export const obtenerDocenteDepartamentoDAL = async (idDocente) => {
     try {
         const pool = await getConnection();
-        const result = await pool.request().execute('[Operaciones].[FiltrarDocenteDepartamento]');
+        const result = await pool.request()
+        .input('IdDocente' ,sql.Int, idDocente)
+        .execute('[Operaciones].[FiltrarDocenteDepartamento]');
         return result.recordset;
     } catch (error) {
         throw error;

@@ -8,7 +8,8 @@ import { DocenteDepartamento } from '../../Library/Models/Operaciones/DocenteDep
 
 export const obtenerDocenteDepartamento = async ( req, res ) => {
     try {
-        const data = await obtenerDocenteDepartamentoBLL();
+        const idDocente = req.params.idDocente;
+        const data = await obtenerDocenteDepartamentoBLL(idDocente);
         const response = {
             status: 'Exito',
             statusCode: 200,
@@ -21,6 +22,30 @@ export const obtenerDocenteDepartamento = async ( req, res ) => {
             status: 'Error',
             statusCode: error.statusCode || 500,
             datos: error.message
+        }
+        res.status(response.statusCode).send(response);
+    }
+
+};
+
+export const filtrarDocenteDepartamentoxId = async ( req, res ) => {
+    try {
+        const idDocenteDepartamento = req.params.idDocenteDepartamento;
+        const data = await obtenerDocenteDepartamentoxIdBLL(idDocenteDepartamento);
+        const response = {
+            status: 'Exito',
+            statusCode: 200,
+            datos: data
+        }
+        res.status(response.statusCode).send(response);
+
+    } catch (error) {
+        const response = {
+            status: 'Error',
+            statusCode: error.statusCode || 500,
+            datos: {
+                mensaje: error.message
+            }
         }
         res.status(response.statusCode).send(response);
     }
@@ -44,11 +69,13 @@ export const insertarDocenteDepartamento = async ( req, res ) => {
         modDocenteDepartamento.UsuarioCreacion = usuarioLog.idUsuario;
         modDocenteDepartamento.UsuarioModificacion = usuarioLog.idUsuario;
 
-        const data = await insertarDocenteDepartamentoBLL(modDocenteDepartamento);
+        await insertarDocenteDepartamentoBLL(modDocenteDepartamento);
         const response = {
             status: 'Exito',
             statusCode: 200,
-            datos: data
+            datos: {
+                mensaje: "Registro creado con éxito"
+            }
         }
         res.status(response.statusCode).send(response);
     } catch (error) {
@@ -79,19 +106,23 @@ export const actualizarDocenteDepartamento = async ( req, res ) => {
             modDocenteDepartamento.Activo = 1;
             modDocenteDepartamento.FechaModificacion = fechaHoraActual;
             modDocenteDepartamento.UsuarioModificacion = usuarioLog.idUsuario;
-            const data = await actualizarDocenteDepartamentoBLL(modDocenteDepartamento);
+            await actualizarDocenteDepartamentoBLL(modDocenteDepartamento);
 
             const response = {
                 status: 'Exito',
                 statusCode: 200,
-                datos: data
+                datos: {
+                    mensaje: "Registro actualizado con éxito"
+                }
             }
             res.status(response.statusCode).send(response);
         }else{
             const response = {
                 status: 'Exito',
                 statusCode: 204,
-                datos: req.body
+                datos: {
+                    mensaje: "Registro no encontrado"
+                }
             }
             res.status(response.statusCode).send(response);
         }
@@ -121,19 +152,23 @@ export const eliminarDocenteDepartamento = async ( req, res ) => {
             modDocenteDepartamento.FechaModificacion = fechaHoraActual;
             modDocenteDepartamento.UsuarioModificacion = usuarioLog.idUsuario;
     
-            const data = await actualizarDocenteDepartamentoBLL(modDocenteDepartamento);
+            await actualizarDocenteDepartamentoBLL(modDocenteDepartamento);
 
             const response = {
                 status: 'Exito',
                 statusCode: 200,
-                datos: data
+                datos: {
+                    mensaje: "Registro eliminado con éxito"
+                }
             }
             res.status(response.statusCode).send(response);
         }else{
             const response = {
                 status: 'Exito',
                 statusCode: 204,
-                datos: req.body
+                datos: {
+                    mensaje: "Registro no encontrado"
+                }
             }
             res.status(response.statusCode).send(response);
         }

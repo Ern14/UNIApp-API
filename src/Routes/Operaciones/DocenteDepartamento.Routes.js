@@ -1,7 +1,8 @@
 import { Router } from "express";
 
 import { 
-    obtenerDocenteDepartamento, 
+    obtenerDocenteDepartamento,
+    filtrarDocenteDepartamentoxId, 
     insertarDocenteDepartamento, 
     actualizarDocenteDepartamento, 
     eliminarDocenteDepartamento 
@@ -11,9 +12,11 @@ const verificarToken = require('../../Authorization/AuthMiddleware');
 
 const router = Router();
 
-router.get('/operaciones/obtenerDocenteDepartamento', verificarToken, obtenerDocenteDepartamento);
+router.get('/operaciones/obtenerDocenteDepartamento/:idDocente', verificarToken, obtenerDocenteDepartamento);
 
 router.post('/operaciones/insertarDocenteDepartamento', verificarToken, insertarDocenteDepartamento);
+
+router.get('/operaciones/filtrarDocenteDepartamentoxId/:idDocenteDepartamento', verificarToken, filtrarDocenteDepartamentoxId);
 
 router.put('/operaciones/actualizarDocenteDepartamento', verificarToken, actualizarDocenteDepartamento);
 
