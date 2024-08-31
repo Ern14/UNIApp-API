@@ -8,7 +8,8 @@ import { CarreraAsignatura } from '../../Library/Models/Operaciones/CarreraAsign
 
 export const obtenerCarreraAsignatura = async ( req, res ) => {
     try {
-        const data = await obtenerCarreraAsignaturaBLL();
+        const idCarrera = req.params.idCarrera;
+        const data = await obtenerCarreraAsignaturaBLL(idCarrera);
         const response = {
             status: 'Exito',
             statusCode: 200,
@@ -21,6 +22,30 @@ export const obtenerCarreraAsignatura = async ( req, res ) => {
             status: 'Error',
             statusCode: error.statusCode || 500,
             datos: error.message
+        }
+        res.status(response.statusCode).send(response);
+    }
+
+};
+
+export const filtrarCarreraAsignaturaxId = async ( req, res ) => {
+    try {
+        const idCarreraAsignatura = req.params.idCarreraAsignatura;
+        const data = await obtenerCarreraAsignaturaxIdBLL(idCarreraAsignatura);
+        const response = {
+            status: 'Exito',
+            statusCode: 200,
+            datos: data
+        }
+        res.status(response.statusCode).send(response);
+
+    } catch (error) {
+        const response = {
+            status: 'Error',
+            statusCode: error.statusCode || 500,
+            datos: {
+                mensaje: error.message
+            }
         }
         res.status(response.statusCode).send(response);
     }
@@ -44,11 +69,13 @@ export const insertarCarreraAsignatura = async ( req, res ) => {
         modCarreraAsignatura.UsuarioCreacion = usuarioLog.idUsuario;
         modCarreraAsignatura.UsuarioModificacion = usuarioLog.idUsuario;
 
-        const data = await insertarCarreraAsignaturaBLL(modCarreraAsignatura);
+        await insertarCarreraAsignaturaBLL(modCarreraAsignatura);
         const response = {
             status: 'Exito',
             statusCode: 200,
-            datos: data
+            datos: {
+                mensaje: "Registro creado con éxito"
+            }
         }
         res.status(response.statusCode).send(response);
     } catch (error) {
@@ -79,19 +106,23 @@ export const actualizarCarreraAsignatura = async ( req, res ) => {
             modCarreraAsignatura.Activo = 1;
             modCarreraAsignatura.FechaModificacion = fechaHoraActual;
             modCarreraAsignatura.UsuarioModificacion = usuarioLog.idUsuario;
-            const data = await actualizarCarreraAsignaturaBLL(modCarreraAsignatura);
+            await actualizarCarreraAsignaturaBLL(modCarreraAsignatura);
 
             const response = {
                 status: 'Exito',
                 statusCode: 200,
-                datos: data
+                datos: {
+                    mensaje: "Registro actualizado con éxito"
+                }
             }
             res.status(response.statusCode).send(response);
         }else{
             const response = {
                 status: 'Exito',
                 statusCode: 204,
-                datos: req.body
+                datos: {
+                    mensaje: "Registro no encontrado"
+                }
             }
             res.status(response.statusCode).send(response);
         }
@@ -113,7 +144,7 @@ export const eliminarCarreraAsignatura = async ( req, res ) => {
 
         const fechaHoraActual = new Date();
         const idCarreraAsignatura = req.body.idCarreraAsignatura;
-        const userData = await obtenerDocenteAsignaturaxIdBLL(idCarreraAsignatura);
+        const userData = await obtenerCarreraAsignaturaxIdBLL(idCarreraAsignatura);
         if (userData.length > 0){
             const modCarreraAsignatura = new CarreraAsignatura(userData[0]);
 
@@ -121,19 +152,23 @@ export const eliminarCarreraAsignatura = async ( req, res ) => {
             modCarreraAsignatura.FechaModificacion = fechaHoraActual;
             modCarreraAsignatura.UsuarioModificacion = usuarioLog.idUsuario;
     
-            const data = await actualizarCarreraAsignaturaBLL(modCarreraAsignatura);
+            await actualizarCarreraAsignaturaBLL(modCarreraAsignatura);
 
             const response = {
                 status: 'Exito',
                 statusCode: 200,
-                datos: data
+                datos: {
+                    mensaje: "Registro eliminado con éxito"
+                }
             }
             res.status(response.statusCode).send(response);
         }else{
             const response = {
                 status: 'Exito',
                 statusCode: 204,
-                datos: req.body
+                datos: {
+                    mensaje: "Registro no encontrado"
+                }
             }
             res.status(response.statusCode).send(response);
         }

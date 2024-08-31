@@ -5,9 +5,9 @@ import {
     obtenerCarreraAsignaturaxIdDAL 
 } from "../../DAL/Operaciones/CarreraAsignatura";
 
-export const obtenerCarreraAsignaturaBLL = async () => {
+export const obtenerCarreraAsignaturaBLL = async (idCarrera) => {
     try {
-        const result = await obtenerCarreraAsignaturaDAL();
+        const result = await obtenerCarreraAsignaturaDAL(idCarrera);
         return result;
     } catch (error) {
         throw error;

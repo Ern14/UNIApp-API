@@ -1,7 +1,8 @@
 import { Router } from "express";
 
 import { 
-    obtenerDocenteAsignatura, 
+    obtenerDocenteAsignatura,
+    filtrarDocenteAsignaturaxId, 
     insertarDocenteAsignatura, 
     actualizarDocenteAsignatura, 
     eliminarDocenteAsignatura 
@@ -11,7 +12,9 @@ const verificarToken = require('../../Authorization/AuthMiddleware');
 
 const router = Router();
 
-router.get('/operaciones/obtenerDocenteAsignatura', verificarToken, obtenerDocenteAsignatura);
+router.get('/operaciones/obtenerDocenteAsignatura/:idAsignatura', verificarToken, obtenerDocenteAsignatura);
+
+router.get('/operaciones/filtrarDocenteAsignaturaxId/:idDocenteAsignatura', verificarToken, filtrarDocenteAsignaturaxId);
 
 router.post('/operaciones/insertarDocenteAsignatura', verificarToken, insertarDocenteAsignatura);
 
