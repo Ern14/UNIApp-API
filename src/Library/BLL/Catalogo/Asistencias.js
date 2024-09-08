@@ -1,8 +1,8 @@
 import { obtenerAsistenciasDAL, insertarAsistenciaDAL, actualizarAsistenciaDAL, obtenerAsistenciaxIdDAL } from "../../DAL/Catalogo/Asistencias";
 
-export const obtenerAsistenciasBLL = async () => {
+export const obtenerAsistenciasBLL = async (idDepartamento,idAsignatura) => {
     try {
-        const asistencias = await obtenerAsistenciasDAL();
+        const asistencias = await obtenerAsistenciasDAL(idDepartamento,idAsignatura);
         return asistencias;
     } catch (error) {
         throw error;

@@ -6,7 +6,7 @@ const verificarToken = require('../../Authorization/AuthMiddleware');
 
 const router = Router();
 
-router.get('/asistencias/obtenerAsistencias', verificarToken, obtenerAsistencias);
+router.get('/asistencias/obtenerAsistencias/:idDepartamento/:idAsignatura', verificarToken, obtenerAsistencias);
 
 router.post('/asistencias/insertarAsistencia', verificarToken, insertarAsistencia);
 

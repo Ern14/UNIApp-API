@@ -2,8 +2,11 @@ import { obtenerAsistenciasBLL, insertarAsistenciaBLL, actualizarAsistenciaBLL, 
 import { Asistencias } from '../../Library/Models/Catalogo/Asistencias';
 
 export const obtenerAsistencias = async ( req, res ) => {
-    try {
-        const data = await obtenerAsistenciasBLL();
+    try {   
+        const idDepartamento = req.params.idDepartamento;
+        const idAsignatura = req.params.idAsignatura;
+        const data = await obtenerAsistenciasBLL(idDepartamento,idAsignatura);
+
         const response = {
             status: 'Exito',
             statusCode: 200,
