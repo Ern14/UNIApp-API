@@ -3,7 +3,8 @@ import express from 'express';
 //Autenticación
 import Auth from './Authentication/Auth.Routes';
 
-//Importaciones de los catalogos
+//Importaciones de los 
+import Archivo from './Catalogos/Archivo.Routes';
 import Asignaturas from './Catalogos/Asignaturas.Routes';
 import Carreras from './Catalogos/Carreras.Routes';
 import Asistencias from './Catalogos/Asistencias.Routes';
@@ -28,6 +29,7 @@ const router = express.Router();
 router.use(Auth);
 
 //Rutas de los catalogos
+router.use(Archivo);
 router.use(Asignaturas);
 router.use(Carreras);
 router.use(Asistencias);
